@@ -9,7 +9,7 @@ Example :
 
 $example = ['one', 'two', 'three'];
 
-var_dump($example->combine(['four', 'five', 'six'], ['seven', 'eight', 'nine']));
+var_dump($example->merge(['four', 'five', 'six'], ['seven', 'eight', 'nine']));
 ```
 
 ```
