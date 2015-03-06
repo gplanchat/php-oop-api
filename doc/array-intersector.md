@@ -42,12 +42,6 @@ Equivalent to [`array_intersect_assoc`](http://php.net/manual/fr/function.array-
 * Parameter `...$subjectArray`, of type `array` (variadic)
 * Returns `array`
 
-
-
-
-
-
-
 ## Class `SplCustomAssociativeArrayIntersector`
 
 Computes the intersection of arrays
@@ -72,9 +66,7 @@ Equivalent to :
 
 Computes the intersection of arrays
 
-Equivalent to :
-* [`array_uintersect_key`](http://php.net/manual/fr/function.array-uintersect-key.php)
-* [`array_intersect_ukey`](http://php.net/manual/fr/function.array-intersect-ukey.php)
+Equivalent to [`array_intersect_ukey`](http://php.net/manual/fr/function.array-intersect-ukey.php)
 
 ### Method `__construct`
 
@@ -86,8 +78,13 @@ Equivalent to :
 * Parameter `...$subjectArray`, of type `array` (variadic)
 * Returns `array`
 
+## Class `SplCustomByValueArrayIntersector`
 
+Computes the intersection of arrays
 
-### Method `​intersectCustom`
+Equivalent to [`array_uintersect`](http://php.net/manual/fr/function.array-uintersect.php)
 
-Equivalent to `array_​uintersect`
+### Method `intersect`
+
+* Parameter `...$subjectArray`, of type `array` (variadic)
+* Returns `array`
