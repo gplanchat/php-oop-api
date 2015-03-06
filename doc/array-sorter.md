@@ -64,7 +64,7 @@ Extends :
 
 * `SplArraySorter`
 
-### Method `ksort`
+### Method `sort`
 
 Equivalent to `ksort`
 
