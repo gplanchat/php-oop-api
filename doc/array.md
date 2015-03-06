@@ -59,9 +59,9 @@ var_dump($result);
 
 ```
 array(3) {
-    0 => 'one',
-    1 => 'two',
-    2 => 'three'
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
 }
 ```
 
@@ -89,9 +89,9 @@ var_dump($result);
 
 ```
 array(3) {
-    'one' => 'apple',
-    'two' => 'melon',
-    'three' => 'banana'
+    0 => 'one',
+    1 => 'two',
+    2 => 'three'
 }
 ```
 
@@ -174,8 +174,8 @@ $myArray = [
    'two' => 'melon',
    'three' => 'banana'
 ];
-$myArray->changeKeyCase();
-var_dump($myArray);
+$result = $myArray->changeKeyCase();
+var_dump($result);
 ```
 
 ```
@@ -196,6 +196,38 @@ Equivalent to [`array_chunk`](http://php.net/manual/en/function.array-chunk.php)
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+   'one',
+   'two',
+   'three',
+   'four',
+   'five'
+];
+$result = $myArray->chunk(2, true);
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => array(2) {
+        0 => 'one',
+        1 => 'two'
+    },
+    1 => array(2) {
+        0 => 'three',
+        1 => 'four'
+    },
+    2 => array(2) {
+        0 => 'five'
+    }
+}
+```
+
 ### Method `column`
 
 Return the values from a single column in the input array
@@ -206,6 +238,46 @@ Equivalent to [`array_column`](http://php.net/manual/en/function.array-column.ph
 * Parameter `$indexKey`, of type `mixed`
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$records = array(
+    array(
+        'id' => 2135,
+        'first_name' => 'John',
+        'last_name' => 'Doe',
+    ),
+    array(
+        'id' => 3245,
+        'first_name' => 'Sally',
+        'last_name' => 'Smith',
+    ),
+    array(
+        'id' => 5342,
+        'first_name' => 'Jane',
+        'last_name' => 'Jones',
+    ),
+    array(
+        'id' => 5623,
+        'first_name' => 'Peter',
+        'last_name' => 'Doe',
+    )
+);
+$result = $records->chunk('first_name');
+var_dump($result);
+```
+
+```
+array(4) {
+    0 => 'John'
+    1 => 'Sally'
+    2 => 'Jane'
+    3 => 'Peter'
+}
+```
+
 ### Method `count`
 
 Count elements of the array
@@ -215,6 +287,26 @@ Equivalent to [`sizeof`](http://php.net/manual/en/function.sizeof.php) and [`cou
 Implements [`Countable::count`](http://php.net/manual/en/countable.count.php).
 
 * Returns `integer`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+   'one',
+   'two',
+   'three',
+   'four',
+   'five'
+];
+$result = $myArray->count();
+var_dump($result);
+```
+
+```
+int(5)
+```
 
 ### Method `countValues`
 
