@@ -1,6 +1,8 @@
 # PHP Scalar objects API - Arrays
 
-This document specifies the `array` scalar type's object-oriented interface.
+This document specifies the `array` scalar type's object-oriented interface for PHP 7+.
+
+This is *NOT* a reimplementation of the array type into objects, it is a thin layer above the current array API, availiable in the userspace.
 
 Example :
 
@@ -849,6 +851,24 @@ Equivalent to [`array_search`](http://php.net/manual/en/function.array-search.ph
 * Parameter `$strict`, of type `boolean`, defaults to `false`
 * Returns `mixed`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->search('melon');
+var_dump($result);
+```
+
+```
+string(3) "two"
+```
+
 ### Method `reduce`
 
 Iteratively reduce the array to a single value using a callback function
@@ -868,7 +888,32 @@ Equivalent to [`array_slice`](http://php.net/manual/en/function.array-slice.php)
 * Parameter `$offset`, of type `integer`
 * Parameter `$length`, of type `integer`, defaults to `null`
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'banana',
+    'strawberry',
+    'pineapple',
+    'lemon'
+];
+$result = $myArray->slice(2, 3, true);
+var_dump($result);
+```
+
+```
+array(3) {
+    2 => 'banana',
+    3 => 'strawberry',
+    4 => 'pineapple',
+}
+```
 
 ### Method `splice`
 
@@ -879,15 +924,33 @@ Equivalent to [`array_splice`](http://php.net/manual/en/function.array-splice.ph
 * Parameter `$offset`, of type `integer`
 * Parameter `$length`, of type `integer`, defaults to `null`
 * Parameter `$replacement`, of type `array`, defaults to *empty array*
-* Returns `array` (a copy of current array)
+* Returns `array`
 
-### Method `unique`
+Example :
 
-Removes duplicate values from an array
+```php
+<?php
 
-Equivalent to [`array_unique`](http://php.net/manual/en/function.array-unique.php)
+$myArray = [
+    'apple',
+    'melon',
+    'banana',
+    'strawberry',
+    'pineapple',
+    'lemon'
+];
 
-* Returns `array` (a copy of current array)
+$result = $myArray->splice(2, 3, true);
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'apple',
+    1 => 'melon',
+    5 => 'lemon',
+}
+```
 
 ### Method `extract`
 
@@ -898,6 +961,27 @@ Equivalent to [`extract`](http://php.net/manual/en/function.extract.php)
 * Parameter `$flags`, of type `integer`, defaults to `SplArray::EXTR_OVERWRITE`
 * Parameter `$prefix`, of type `string`, defaults to `null`
 * Returns `integer`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+
+$result = $myArray->extract();
+var_dump($one, $two, $three);
+```
+
+```
+string(3) "one"
+string(3) "two"
+string(5) "three"
+```
 
 ### Method `sum`
 
