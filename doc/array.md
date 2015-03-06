@@ -584,6 +584,30 @@ Equivalent to [`array_walk`](http://php.net/manual/en/function.array-walk.php)
 * Parameter `$userdata`, of type `mixed`, defaults to `null`
 * returns `bool`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->walk(function($value, $key, $pattern){
+    return sprintf($pattern, $value);
+}, '%s is a fruit');
+var_dump($result);
+```
+
+```
+array(3) {
+    'one' => 'apple is a fruit',
+    'two' => 'melon is a fruit',
+    'three' => 'banana is a fruit'
+}
+```
+
 ### Method `recursiveWalk`
 
 Apply a user function recursively to every member of an array
@@ -593,6 +617,43 @@ Equivalent to [`array_walk_recursive`](http://php.net/manual/en/function.array-w
 * Parameter `$callback`, of type `callable`
 * Parameter `$userdata`, of type `mixed`, defaults to `null`
 * returns `bool`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    [
+        'one' => 'apple',
+        'two' => 'melon',
+        'three' => 'banana'
+    ], [
+        'four' => 'strawberry',
+        'five' => 'pineapple',
+        'six' => 'lemon'
+    ]
+];
+$result = $myArray->RecursiveWalk(function($value, $key, $pattern){
+    return sprintf($pattern, $value);
+}, '%s is a fruit');
+var_dump($result);
+```
+
+```
+array(3) {
+    array(2) {
+        'one' => 'apple is a fruit',
+        'two' => 'melon is a fruit',
+        'three' => 'banana is a fruit'
+    },
+    array(2) {
+        'four' => 'strawberry is a fruit',
+        'five' => 'pineapple is a fruit',
+        'six' => 'lemon is a fruit'
+    }
+}
+```
 
 ### Method `merge`
 
