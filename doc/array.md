@@ -1,6 +1,6 @@
 # PHP Scalar objects API - Arrays
 
-This document specifies the `array` scalar type's object-oriented interface
+This document specifies the `array` scalar type's object-oriented interface.
 
 Example :
 
@@ -641,13 +641,13 @@ var_dump($result);
 ```
 
 ```
-array(3) {
-    array(2) {
+array(2) {
+    array(3) {
         'one' => 'apple is a fruit',
         'two' => 'melon is a fruit',
         'three' => 'banana is a fruit'
     },
-    array(2) {
+    array(3) {
         'four' => 'strawberry is a fruit',
         'five' => 'pineapple is a fruit',
         'six' => 'lemon is a fruit'
@@ -662,7 +662,36 @@ Merge one or more arrays
 Equivalent to [`array_merge`](http://php.net/manual/en/function.array-merge.php)
 
 * Parameter `...$mergedArray`, of type `array` (variadic)
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$friendArray = [
+    'three' => 'strawberry',
+    'four' => 'pineapple',
+    'five' => 'lemon'
+];
+$result = $myArray->merge($friendArray);
+var_dump($result);
+```
+
+```
+array(5) {
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'strawberry',
+    'four' => 'pineapple',
+    'five' => 'lemon'
+}
+```
 
 ### Method `recursiveMerge`
 
@@ -671,7 +700,50 @@ Merge two or more arrays recursively
 Equivalent to [`array_merge_recursive`](http://php.net/manual/en/function.array-merge-recursive.php)
 
 * Parameter `...$mergedArray`, of type `array` (variadic)
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    [
+        'one' => 'apple',
+        'two' => 'melon',
+        'three' => 'banana'
+    ], [
+        'four' => 'strawberry',
+        'five' => 'pineapple'
+    ]
+];
+
+$friendArray = [
+    [
+        'one' => 'pineapple',
+    ], [
+        'six' => 'lemon'
+    ]
+];
+
+$result = $myArray->merge($friendArray);
+var_dump($result);
+```
+
+```
+array(2) {
+    array(3) {
+        'one' => 'pineapple',
+        'two' => 'melon',
+        'three' => 'banana'
+    },
+    array(3) {
+        'four' => 'strawberry',
+        'five' => 'pineapple',
+        'six' => 'lemon'
+    }
+}
+```
 
 ### Method `replace`
 
