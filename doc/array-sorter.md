@@ -34,6 +34,10 @@ array(5) {
 
 ## Class `SplAlphaArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
 ### Method `asort`
 
 Equivalent to [`asort`](http://php.net/manual/en/function.asort.php)
@@ -43,6 +47,10 @@ Equivalent to [`asort`](http://php.net/manual/en/function.asort.php)
 
 ## Class `SplAlphaReverseArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
 ### Method `sort`
 
 Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php)
@@ -51,6 +59,10 @@ Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php)
 * Returns `array`
 
 ## Class `SplKeyArraySorter`
+
+Extends :
+
+* `SplArraySorter`
 
 ### Method `ksort`
 
@@ -63,6 +75,10 @@ Equivalent to [`ksort`](http://php.net/manual/en/function.ksort.php)
 
 ## Class `SplReverseKeyArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
 ### Method `sort`
 
 Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php)
@@ -71,6 +87,10 @@ Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php)
 * Returns `array`
 
 ## Class `SplStandardArraySorter`
+
+Extends :
+
+* `SplArraySorter`
 
 ### Method `sort`
 
@@ -81,6 +101,10 @@ Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
 
 ## Class `SplReverseStandardArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
 ### Method `sort`
 
 Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php)
@@ -90,6 +114,14 @@ Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php)
 
 ## Class `SplCustomArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
+### Method `__construct`
+
+* Parameter `$callback`, of type `callable`
+
 ### Method `sort`
 
 Equivalent to [`usort`](http://php.net/manual/en/function.usort.php)
@@ -97,13 +129,15 @@ Equivalent to [`usort`](http://php.net/manual/en/function.usort.php)
 * Parameter `$array`, of type `array`
 * Returns `array`
 
-## Class `SplCustomKeyArraySorter`
+## Class `SplCustomAssociativeArraySorter`
+
+Extends :
+
+* `SplArraySorter`
 
 ### Method `__construct`
 
 * Parameter `$callback`, of type `callable`
-
-## Class `SplCustomAssociativeArraySorter`
 
 ### Method `sort`
 
@@ -111,6 +145,16 @@ Equivalent to [`uasort`](http://php.net/manual/en/function.uasort.php)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
+
+## Class `SplCustomKeyArraySorter`
+
+Extends :
+
+* `SplArraySorter`
+
+### Method `__construct`
+
+* Parameter `$callback`, of type `callable`
 
 ### Method `sort`
 
@@ -121,6 +165,10 @@ Equivalent to [`uksort`](http://php.net/manual/en/function.uksort.php)
 
 ## Class `SplShuffleArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
 ### Method `sort`
 
 Equivalent to [`shuffle`](http://php.net/manual/en/function.shuffle.php)
@@ -130,6 +178,10 @@ Equivalent to [`shuffle`](http://php.net/manual/en/function.shuffle.php)
 
 ## Class `SplNaturalCaseSensitiveArraySorter`
 
+Extends :
+
+* `SplArraySorter`
+
 ### Method `sort`
 
 Equivalent to [`natcasesort`](http://php.net/manual/en/function.natcasesort.php)
@@ -138,6 +190,10 @@ Equivalent to [`natcasesort`](http://php.net/manual/en/function.natcasesort.php)
 * Returns `array`
 
 ## Class `SplNaturalArraySorter`
+
+Extends :
+
+* `SplArraySorter`
 
 ### Method `sort`
 
