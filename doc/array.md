@@ -16,7 +16,7 @@ var_dump($example->merge(['four', 'five', 'six'], ['seven', 'eight', 'nine']));
 array(9) {
     0 => 'one',
     1 => 'two',
-    2 => 'three'
+    2 => 'three',
     3 => 'four',
     4 => 'five',
     5 => 'six',
@@ -45,6 +45,26 @@ Equivalent to [`array_combine`](http://php.net/manual/en/function.array-combine.
 * Parameter `$indexKey`, of type `Traversable`
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$keys = ['one', 'two', 'three'];
+$values = ['apple', 'melon', 'banana'];
+
+$result = SplArray::combine($keys, $values);
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'one',
+    1 => 'two',
+    2 => 'three'
+}
+```
+
 ### Static method `compact`
 
 Create array containing variables and their values
@@ -53,6 +73,27 @@ Equivalent to [`compact`](http://php.net/manual/en/function.compact.php)
 
 * Parameter `...$vars`, of type `mixed` (variadic)
 * Returns `array`
+
+Example :
+
+```php
+<?php
+
+$one = 'one';
+$two = 'two';
+$three = 'three';
+
+$result = SplArray::compact($one, $two, $three);
+var_dump($result);
+```
+
+```
+array(3) {
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+}
+```
 
 ### Static method `fill`
 
@@ -65,6 +106,25 @@ Equivalent to [`array_​fill`](http://php.net/manual/en/function.array-fill.php
 * Parameter `$value`, of type `mixed`
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$result = SplArray::fill(0, 5, 'Initial value');
+var_dump($result);
+```
+
+```
+array(5) {
+    0 => 'Initial value',
+    1 => 'Initial value',
+    2 => 'Initial value',
+    3 => 'Initial value',
+    4 => 'Initial value'
+}
+```
+
 ### Static method `fillKeys`
 
 Fill an array with values, specifying keys
@@ -75,14 +135,56 @@ Equivalent to [`array_​fill_​keys`](http://php.net/manual/en/function.array-
 * Parameter `$value`, of type `mixed`
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$keys = ['one', 'two', 'three'];
+$result = SplArray::fillKeys($keys, 'Initial value');
+var_dump($result);
+```
+
+```
+array(3) {
+    'one' => 'Initial value',
+    'two' => 'Initial value',
+    'three' => 'Initial value'
+}
+```
+
 ### Method `changeKeyCase`
 
 Changes the case of all keys in an array
 
 Equivalent to [`array_change_key_case`](http://php.net/manual/en/function.array-change-key-case.php)
 
-* Parameter `$size`, of type `integer`, defaults to `SplArray::CASE_LOWER`
-* Returns `void`
+* Parameter `$size`, of type `integer`, defaults to `SplArray::CASE_LOWER`, possible values :
+  * SplArray::CASE_LOWER
+  * SplArray::CASE_UPPER
+* Returns `array` (a copy of current array)
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+   'one' => 'apple',
+   'two' => 'melon',
+   'three' => 'banana'
+];
+$myArray->changeKeyCase();
+var_dump($myArray);
+```
+
+```
+array(3) {
+    'ONE' => 'apple',
+    'TWO' => 'melon',
+    'THREE' => 'banana'
+}
+```
 
 ### Method `chunk`
 
