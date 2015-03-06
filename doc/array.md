@@ -380,14 +380,13 @@ Equivalent to [`end`](http://php.net/manual/en/function.end.php)
 
 * Returns `void`
 
-### Method `begin`
-
-
-Reverse method of [`end`](http://php.net/manual/en/function.end.php)
-
 ### Method `pair`
 
+Return the current key and value pair from an array and advance the array cursor
+
 Equivalent to [`each`](http://php.net/manual/en/function.each.php)
+
+* Returns `SplArray`
 
 
 
