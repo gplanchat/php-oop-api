@@ -9,7 +9,7 @@ Simple example :
 
 $example = ['strawberry', 'blackberry', 'raspberry', 'blueberry', 'cranberry'];
 
-$sorter = new AlphaArraySOrter();
+$sorter = new SplAlphaArraySorter();
 $sortedArray = $sorter->sort($example);
 
 var_dump($sortedArray);
@@ -29,82 +29,135 @@ array(5) {
 
 ### Abstract method `sort`
 
+* Parameter `$array`, of type `array`
+* Returns `array`
 
-
-## Class `NaturalCaseArraySorter`
-
-### Method `sort`
-
-Equivalent to `natcasesort`
-
-## Class `NaturalArraySorter`
-
-### Method `sort`
-
-Equivalent to `natsort`
-
-## Class `ReverseArraySorter`
-
-### Method `sort`
-
-Equivalent to `rsort`
-
-## Class `ShuffleArraySorter`
-
-### Method `sort`
-
-Equivalent to `shuffle`
-
-## Class `StandardArraySorter`
-
-### Method `sort`
-
-Equivalent to `sort`
-
-## Class `CustomKeyArraySorter`
-
-### Method `sort`
-
-Equivalent to `uksort`
-
-## Class `CustomAssociativeArraySorter`
-
-### Method `sort`
-
-Equivalent to `uasort`
-
-## Class `CustomAssociativeArraySorter`
-
-### Method `usort`
-
-Equivalent to `usort`
-
-
-### Method `arsort`
-
-Equivalent to `arsort`
-
+## Class `SplAlphaArraySorter`
 
 ### Method `asort`
 
-Equivalent to `asort`
+Equivalent to [`asort`](http://php.net/manual/en/function.asort.php)
 
+* Parameter `$array`, of type `array`
+* Returns `array`
 
-### Method `krsort`
+## Class `SplAlphaReverseArraySorter`
 
-Equivalent to `krsort`
+### Method `sort`
 
+Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplKeyArraySorter`
 
 ### Method `ksort`
 
 Equivalent to `ksort`
 
+Equivalent to [`ksort`](http://php.net/manual/en/function.ksort.php)
 
-### Method `​rand`
+* Parameter `$array`, of type `array`
+* Returns `array`
 
-Equivalent to `array_​rand`
+## Class `SplReverseKeyArraySorter`
+
+### Method `sort`
+
+Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
 
 
-### Method `​multisort`
+
+
+
+
+
+
+## Class `SplNaturalCaseArraySorter`
+
+### Method `sort`
+
+Equivalent to [`natcasesort`](http://php.net/manual/en/function.natcasesort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `NaturalArraySorter`
+
+### Method `sort`
+
+Equivalent to [`natsort`](http://php.net/manual/en/function.natsort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplReverseNaturalCaseArraySorter`
+
+### Method `sort`
+
+Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplShuffleArraySorter`
+
+### Method `sort`
+
+Equivalent to [`shuffle`](http://php.net/manual/en/function.shuffle.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplStandardArraySorter`
+
+### Method `sort`
+
+Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplCustomKeyArraySorter`
+
+### Method `sort`
+
+Equivalent to [`uksort`](http://php.net/manual/en/function.uksort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplCustomAssociativeArraySorter`
+
+### Method `sort`
+
+Equivalent to [`uasort`](http://php.net/manual/en/function.uasort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplCustomArraySorter`
+
+### Method `sort`
+
+Equivalent to [`usort`](http://php.net/manual/en/function.usort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+
+
+
+
+### Method `rand`
+
+Equivalent to `array_rand`
+
+
+### Method `multisort`
 
 Equivalent to `array_​multisort`
