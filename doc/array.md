@@ -388,37 +388,39 @@ Equivalent to [`each`](http://php.net/manual/en/function.each.php)
 
 * Returns `SplArray`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Method `pop`
 
-Equivalent to `array_pop`
+Pop the element off the end of array
 
+Equivalent to [`array_pop`](http://php.net/manual/en/function.array-pop.php)
+
+* Returns `mixed`
 
 ### Method `push`
 
-Equivalent to `array_push`
+Push one or more elements onto the end of array
 
+Equivalent to [`array_push`](http://php.net/manual/en/function.array-push.php)
+
+* Parameter `...$items`, of type `mixed` (variadic)
+* Returns `void`
 
 ### Method `shift`
 
-Equivalent to `array_shift`
+Shift an element off the beginning of array
 
+Equivalent to [`array_shift`](http://php.net/manual/en/function.array-shift.php)
+
+* Returns `mixed`
 
 ### Method `unshift`
 
-Equivalent to `array_unshift`
+Prepend one or more elements to the beginning of an array
+
+Equivalent to [`array_unshift`](http://php.net/manual/en/function.array-unshift.php)
+
+* Parameter `...$items`, of type `mixed` (variadic)
+* Returns `void`
 
 
 
