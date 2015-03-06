@@ -1,7 +1,35 @@
+# PHP Scalar objects API - Array sorters
 
-## Abstract class `Spl\ArraySorter`
+This document describes the `array` scalar type's object-oriented sorting interface
+
+Simple example :
+
+```php
+<?php
+
+$example = ['strawberry', 'blackberry', 'raspberry', 'blueberry', 'cranberry'];
+
+$sorter = new AlphaArraySOrter();
+$sortedArray = $sorter->sort($example);
+
+var_dump($sortedArray);
+```
+
+```
+array(5) {
+    0 => 'blackberry',
+    1 => 'blueberry',
+    2 => 'cranberry',
+    3 => 'raspberry',
+    4 => 'strawberry'
+}
+```
+
+## Abstract class `SplArraySorter`
 
 ### Abstract method `sort`
+
+
 
 ## Class `NaturalCaseArraySorter`
 
