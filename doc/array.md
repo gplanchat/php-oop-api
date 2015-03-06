@@ -1101,6 +1101,29 @@ Equivalent to [`array_pop`](http://php.net/manual/en/function.array-pop.php)
 
 * Returns `mixed`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'banana'
+];
+
+$result = $myArray->pop();
+var_dump($result, $myArray);
+```
+
+```
+string(3) "banana"
+array(2) {
+    0 => 'apple'
+    1 => 'melon'
+}
+```
+
 ### Method `push`
 
 Push one or more elements onto the end of array
@@ -1109,6 +1132,30 @@ Equivalent to [`array_push`](http://php.net/manual/en/function.array-push.php)
 
 * Parameter `...$items`, of type `mixed` (variadic)
 * Returns `void`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'banana'
+];
+
+$myArray->push('pineapple');
+var_dump($myArray);
+```
+
+```
+array(2) {
+    0 => 'melon',
+    1 => 'banana',
+    2 => 'banana',
+    3 => 'pineapple'
+}
+```
 
 ### Method `shift`
 
@@ -1162,11 +1209,10 @@ $myArray = [
 ];
 
 $myArray->unshift('pineapple');
-var_dump($result, $myArray);
+var_dump($myArray);
 ```
 
 ```
-string(3) "apple"
 array(2) {
     0 => 'pineapple',
     1 => 'melon',
