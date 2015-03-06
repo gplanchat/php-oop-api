@@ -162,7 +162,7 @@ Equivalent to [`array_change_key_case`](http://php.net/manual/en/function.array-
 * Parameter `$size`, of type `integer`, defaults to `SplArray::CASE_LOWER`, possible values :
   * SplArray::CASE_LOWER
   * SplArray::CASE_UPPER
-* Returns `array` (a copy of current array)
+* Returns `array`
 
 Example :
 
@@ -316,13 +316,53 @@ Equivalent to [`array_count_values`](http://php.net/manual/en/function.array-cou
 
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$myArray = [1, 'hello', 1, 'world', 'hello'];
+$result = $myArray->countValues();
+var_dump($result);
+```
+
+```
+array(3) {
+    1 => 2,
+    'hello' => 2,
+    'world' => 1
+}
+```
+
 ### Method `flip`
 
 Exchanges all keys with their associated values in an array
 
 Equivalent to [`array_flip`](http://php.net/manual/en/function.array-flip.php)
 
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->flip();
+var_dump($result);
+```
+
+```
+array(3) {
+    'apple' => 'one',
+    'melon' => 'two',
+    'banana' => 'three'
+}
+```
 
 ### Method `pad`
 
@@ -330,7 +370,31 @@ Pad array to the specified length with a value
 
 Equivalent to [`array_pad`](http://php.net/manual/en/function.array-pad.php)
 
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one',
+    'two',
+    'three'
+];
+$result = $myArray->pad(5, 'unsetted value');
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'one',
+    1 => 'two',
+    2 => 'three',
+    3 => 'unsetted value',
+    4 => 'unsetted value'
+}
+```
 
 ### Method `reverse`
 
@@ -339,7 +403,29 @@ Return an array with elements in reverse order
 Equivalent to [`array_reverse`](http://php.net/manual/en/function.array-reverse.php)
 
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'banana'
+];
+$result = $myArray->reverse();
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'three',
+    1 => 'two',
+    2 => 'one'
+}
+```
 
 ### Method `unique`
 
@@ -348,7 +434,31 @@ Removes duplicate values from an array
 Equivalent to [`array_unique`](http://php.net/manual/en/function.array-unique.php)
 
 * Parameter `$sortFlags`, of type `integer`, defaults to `SplArray::SORT_STRING`
-* Returns `array` (a copy of current array)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'apple',
+    'banana',
+    'melon',
+];
+$result = $myArray->unique();
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'apple',
+    1 => 'melon',
+    2 => 'banana'
+}
+```
 
 ### Method `hasKey`
 
@@ -359,14 +469,50 @@ Equivalent to [`array_key_exists`](http://php.net/manual/en/function.array-key-e
 * Parameter `$key`, of type `mixed`
 * Returns `bool`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->hasKey('two');
+var_dump($result);
+```
+
+```
+bool(true)
+```
+
 ### Method `has`
 
 Checks if a value exists in an array
 
 Equivalent to [`in_array`](http://php.net/manual/en/function.in-array.php)
 
-* Parameter `$key`, of type `mixed`
+* Parameter `$value`, of type `mixed`
 * Returns `bool`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->hasKey('melon');
+var_dump($result);
+```
+
+```
+bool(true)
+```
 
 ### Method `keys`
 
@@ -376,6 +522,28 @@ Equivalent to [`array_keys`](http://php.net/manual/en/function.array-keys.php)
 
 * Returns `array`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->keys('melon');
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'one',
+    1 => 'two',
+    2 => 'three'
+}
+```
+
 ### Method `values`
 
 Return all the values of an array
@@ -383,6 +551,28 @@ Return all the values of an array
 Equivalent to [`array_values`](http://php.net/manual/en/function.array-values.php)
 
 * Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->values('melon');
+var_dump($result);
+```
+
+```
+array(3) {
+    0 => 'apple',
+    1 => 'melon',
+    2 => 'banana'
+}
+```
 
 ### Method `walk`
 
