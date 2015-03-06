@@ -202,15 +202,19 @@ Equivalent to [`natsort`](http://php.net/manual/en/function.natsort.php)
 * Parameter `$array`, of type `array`
 * Returns `array`
 
+## Class `SplChainingArraySorter`
 
+Extends :
 
+* `SplArraySorter`
 
+### Method `__construct`
 
-### Method `rand`
+* Parameter `...$sorters`, of type `SplArraySorter` (variadic)
 
-Equivalent to `array_rand`
+### Method `sort`
 
+Equivalent to [`array_multisort`](http://php.net/manual/en/function.array-multisort.php)
 
-### Method `multisort`
-
-Equivalent to `array_​multisort`
+* Parameter `$array`, of type `array`
+* Returns `array`
