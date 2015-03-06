@@ -69,6 +69,39 @@ array(3) {
 }
 ```
 
+### Static method `range`
+
+Create an array containing a range of elements
+
+Equivalent to [`range`](http://php.net/manual/en/function.range.php)
+
+* Parameter `$start`, of type `mixed`
+* Parameter `$end`, of type `mixed`
+* Parameter `$step`, of type `numeric`, defaults to `1`
+* Returns `integer`
+
+Example :
+
+```php
+<?php
+
+$myArray = SplArray::range(0, 10, 2);
+
+$result = $myArray->pair();
+var_dump($result);
+```
+
+```
+array(2) {
+    0 => 0,
+    1 => 2,
+    2 => 4,
+    3 => 6,
+    4 => 8,
+    5 => 10
+}
+```
+
 ### Static method `compact`
 
 Create array containing variables and their values
@@ -993,6 +1026,21 @@ Equivalent to [`array_sum`](http://php.net/manual/en/function.array-sum.php)
 
 * Returns `number`
 
+Example :
+
+```php
+<?php
+
+$myArray = [2, 7, 14];
+
+$result = $myArray->extract();
+var_dump($result);
+```
+
+```
+integer(23)
+```
+
 ### Method `product`
 
 Calculate the product of values in an array
@@ -1001,16 +1049,20 @@ Equivalent to [`array_product`](http://php.net/manual/en/function.array-product.
 
 * Returns `number`
 
-### Method `range`
+Example :
 
-Create an array containing a range of elements
+```php
+<?php
 
-Equivalent to [`range`](http://php.net/manual/en/function.range.php)
+$myArray = [2, 7, 14];
 
-* Parameter `$start`, of type `mixed`
-* Parameter `$end`, of type `mixed`
-* Parameter `$step`, of type `numeric`, defaults to `1`
-* Returns `integer`
+$result = $myArray->extract();
+var_dump($result);
+```
+
+```
+integer(196)
+```
 
 ### Method `current`
 
@@ -1092,6 +1144,26 @@ Return the current key and value pair from an array and advance the array cursor
 Equivalent to [`each`](http://php.net/manual/en/function.each.php)
 
 * Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple'
+];
+
+$result = $myArray->pair();
+var_dump($result);
+```
+
+```
+array(2) {
+    0 => 'one'
+    1 => 'apple'
+}
+```
 
 ### Method `pop`
 
