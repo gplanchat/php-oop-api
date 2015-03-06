@@ -670,6 +670,98 @@ Example :
 <?php
 
 $myArray = [
+    'apple',
+    'melon',
+    'banana'
+];
+$friendArray = [
+    'strawberry',
+    'pineapple',
+    'lemon'
+];
+$result = $myArray->merge($friendArray);
+var_dump($result);
+```
+
+```
+array(5) {
+    0 => 'apple',
+    1 => 'melon',
+    2 => 'banana',
+    3 => 'strawberry',
+    4 => 'pineapple',
+    5 => 'lemon'
+}
+```
+
+### Method `recursiveMerge`
+
+Merge two or more arrays recursively
+
+Equivalent to [`array_merge_recursive`](http://php.net/manual/en/function.array-merge-recursive.php)
+
+* Parameter `...$mergedArray`, of type `array` (variadic)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    [
+        'apple',
+        'melon',
+        'banana'
+    ], [
+        'strawberry',
+        'pineapple'
+    ]
+];
+
+$friendArray = [
+    [
+        'pineapple',
+    ], [
+        'lemon'
+    ]
+];
+
+$result = $myArray->merge($friendArray);
+var_dump($result);
+```
+
+```
+array(2) {
+    array(3) {
+        0 => 'apple',
+        1 => 'melon',
+        2 => 'banana',
+        3 => 'pineapple'
+    },
+    array(3) {
+        0 => 'strawberry',
+        1 => 'pineapple',
+        2 => 'lemon'
+    }
+}
+```
+
+### Method `replace`
+
+Replaces elements from passed arrays into the first array
+
+Equivalent to [`array_replace`](http://php.net/manual/en/function.array-replace.php)
+
+* Parameter `...$replacing`, of type `array` (variadic)
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
     'one' => 'apple',
     'two' => 'melon',
     'three' => 'banana'
@@ -679,7 +771,7 @@ $friendArray = [
     'four' => 'pineapple',
     'five' => 'lemon'
 ];
-$result = $myArray->merge($friendArray);
+$result = $myArray->replace($friendArray);
 var_dump($result);
 ```
 
@@ -693,14 +785,14 @@ array(5) {
 }
 ```
 
-### Method `recursiveMerge`
+### Method `recursiveReplace`
 
-Merge two or more arrays recursively
+Replaces elements from passed arrays into the first array recursively
 
-Equivalent to [`array_merge_recursive`](http://php.net/manual/en/function.array-merge-recursive.php)
+Equivalent to [`array_replace_recursive`](http://php.net/manual/en/function.array-replace-recursive.php)
 
 * Parameter `...$mergedArray`, of type `array` (variadic)
-* Returns `array`
+* Returns `array` (a copy of current array)
 
 Example :
 
@@ -722,11 +814,12 @@ $friendArray = [
     [
         'one' => 'pineapple',
     ], [
-        'six' => 'lemon'
+        'six' => 'lemon',
+        'seven' => 'pear'
     ]
 ];
 
-$result = $myArray->merge($friendArray);
+$result = $myArray->recursiveReplace($friendArray);
 var_dump($result);
 ```
 
@@ -737,31 +830,14 @@ array(2) {
         'two' => 'melon',
         'three' => 'banana'
     },
-    array(3) {
+    array(4) {
         'four' => 'strawberry',
         'five' => 'pineapple',
-        'six' => 'lemon'
+        'six' => 'lemon',
+        'seven' => 'pear'
     }
 }
 ```
-
-### Method `replace`
-
-Replaces elements from passed arrays into the first array
-
-Equivalent to [`array_replace`](http://php.net/manual/en/function.array-replace.php)
-
-* Parameter `...$mergedArray`, of type `array` (variadic)
-* Returns `array` (a copy of current array)
-
-### Method `recursiveReplace`
-
-Replaces elements from passed arrays into the first array recursively
-
-Equivalent to [`array_replace_recursive`](http://php.net/manual/en/function.array-replace-recursive.php)
-
-* Parameter `...$mergedArray`, of type `array` (variadic)
-* Returns `array` (a copy of current array)
 
 ### Method `search`
 
