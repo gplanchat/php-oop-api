@@ -210,6 +210,20 @@ Extends :
 
 ### Method `__construct`
 
+Initantiates a multi-sorter, with in parameter every internal sorter
+
+* Parameter `...$sorters`, of type `SplArraySorter` (variadic)
+
+### Method `add`
+
+Adds multiple internal sorters in the multi-sorter
+
+* Parameter `...$sorters`, of type `SplArraySorter` (variadic)
+
+### Method `remove`
+
+Removes multiple internal sorters from the multi-sorter
+
 * Parameter `...$sorters`, of type `SplArraySorter` (variadic)
 
 ### Method `sort`
