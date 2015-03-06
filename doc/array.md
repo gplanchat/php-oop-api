@@ -298,6 +298,7 @@ Equivalent to [`array_product`](http://php.net/manual/en/function.array-product.
 
 ### Method `range`
 
+Create an array containing a range of elements
 
 Equivalent to [`range`](http://php.net/manual/en/function.range.php)
 
@@ -308,45 +309,79 @@ Equivalent to [`range`](http://php.net/manual/en/function.range.php)
 
 ### Method `current`
 
+Return the current element in an array
+
 Equivalent to [`current`](http://php.net/manual/en/function.current.php) and [`pos`](http://php.net/manual/en/function.pos.php)
 
 Implements [`ArrayIterator::current`](http://php.net/manual/en/arrayiterator.current.php)
 
+* Returns `void`
+
 ### Method `key`
+
+Fetch a key from an array
 
 Equivalent to [`key`](http://php.net/manual/en/function.key.php)
 
 Implements [`ArrayIterator::key`](http://php.net/manual/en/arrayiterator.key.php)
 
+* Returns `mixed`
+
 ### Method `next`
+
+Advance the internal array pointer of an array
 
 Equivalent [`next`](http://php.net/manual/en/function.next.php)
 
 Implements [`ArrayIterator::next`](http://php.net/manual/en/arrayiterator.next.php)
 
+* Returns `void`
+
 ### Method `prev`
+
+Move back the internal array pointer of an array
 
 Reverse method of [`next`](http://php.net/manual/en/function.next.php)
 
+* Returns `void`
+
 ### Method `rewind`
+
+Set the internal pointer of an array to its first element
 
 Equivalent [`reset`](http://php.net/manual/en/function.reset.php)
 
 Implements [`ArrayIterator::reset`](http://php.net/manual/en/arrayiterator.reset.php)
 
+* Returns `void`
+
 ### Method `seek`
+
+Seek to position
 
 Implements [`ArrayIterator::seek`](http://php.net/manual/en/arrayiterator.seek.php)
 
+* Parameter `$position`, of type `integer`
+* Returns `void`
+
 ### Method `valid`
+
+Check whether array contains more entries
 
 Implements [`ArrayIterator::reset`](http://php.net/manual/en/arrayiterator.valid.php)
 
+* Returns `boolean`
+
 ### Method `end`
+
+Set the internal pointer of an array to its last element
 
 Equivalent to [`end`](http://php.net/manual/en/function.end.php)
 
+* Returns `void`
+
 ### Method `begin`
+
 
 Reverse method of [`end`](http://php.net/manual/en/function.end.php)
 
