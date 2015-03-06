@@ -1,5 +1,31 @@
 # PHP Scalar objects API - Arrays
 
+This document specifies the `array` scalar type's object-oriented interface
+
+Example :
+
+```php
+<?php
+
+$example = ['one', 'two', 'three'];
+
+var_dump($example->combine(['four', 'five', 'six'], ['seven', 'eight', 'nine']));
+```
+
+```
+array(9) {
+    0 => 'one',
+    1 => 'two',
+    2 => 'three'
+    3 => 'four',
+    4 => 'five',
+    5 => 'six',
+    6 => 'seven',
+    7 => 'eight',
+    8 => 'nine'
+}
+```
+
 ## Virtual class `SplArray`
 
 Implements :
@@ -421,12 +447,4 @@ Equivalent to [`array_unshift`](http://php.net/manual/en/function.array-unshift.
 
 * Parameter `...$items`, of type `mixed` (variadic)
 * Returns `void`
-
-
-
-
-
-### Method `list`
-
-Equivalent to `list`
 
