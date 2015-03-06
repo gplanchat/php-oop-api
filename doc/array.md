@@ -26,7 +26,7 @@ array(9) {
 }
 ```
 
-## Virtual class `SplArray`
+## Scalar class helper for `array`
 
 Implements :
 * `IteratorAggregate`
@@ -43,7 +43,7 @@ Equivalent to [`array_combine`](http://php.net/manual/en/function.array-combine.
 
 * Parameter `$columnKey`, of type `Traversable`
 * Parameter `$indexKey`, of type `Traversable`
-* Returns `SplArray`
+* Returns `array`
 
 ### Static method `compact`
 
@@ -52,7 +52,7 @@ Create array containing variables and their values
 Equivalent to [`compact`](http://php.net/manual/en/function.compact.php)
 
 * Parameter `...$vars`, of type `mixed` (variadic)
-* Returns `SplArray`
+* Returns `array`
 
 ### Static method `fill`
 
@@ -63,7 +63,7 @@ Equivalent to [`array_​fill`](http://php.net/manual/en/function.array-fill.php
 * Parameter `$startIndex`, of type `integer`
 * Parameter `$count`, of type `integer`
 * Parameter `$value`, of type `mixed`
-* Returns `SplArray`
+* Returns `array`
 
 ### Static method `fillKeys`
 
@@ -71,9 +71,9 @@ Fill an array with values, specifying keys
 
 Equivalent to [`array_​fill_​keys`](http://php.net/manual/en/function.array-fill-keys.php)
 
-* Parameter `$keys`, of type `SplArray`
+* Parameter `$keys`, of type `array`
 * Parameter `$value`, of type `mixed`
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `changeKeyCase`
 
@@ -92,7 +92,7 @@ Equivalent to [`array_chunk`](http://php.net/manual/en/function.array-chunk.php)
 
 * Parameter `$size`, of type `integer`
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `column`
 
@@ -102,7 +102,7 @@ Equivalent to [`array_column`](http://php.net/manual/en/function.array-column.ph
 
 * Parameter `$columnKey`, of type `mixed`
 * Parameter `$indexKey`, of type `mixed`
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `count`
 
@@ -120,7 +120,7 @@ Counts all the values of an array
 
 Equivalent to [`array_count_values`](http://php.net/manual/en/function.array-count-values.php)
 
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `flip`
 
@@ -128,7 +128,7 @@ Exchanges all keys with their associated values in an array
 
 Equivalent to [`array_flip`](http://php.net/manual/en/function.array-flip.php)
 
-* Returns `SplArray` (a copy of current array)
+* Returns `array` (a copy of current array)
 
 ### Method `pad`
 
@@ -136,7 +136,7 @@ Pad array to the specified length with a value
 
 Equivalent to [`array_pad`](http://php.net/manual/en/function.array-pad.php)
 
-* Returns `SplArray` (a copy of current array)
+* Returns `array` (a copy of current array)
 
 ### Method `reverse`
 
@@ -145,7 +145,7 @@ Return an array with elements in reverse order
 Equivalent to [`array_reverse`](http://php.net/manual/en/function.array-reverse.php)
 
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `SplArray` (a copy of current array)
+* Returns `array` (a copy of current array)
 
 ### Method `unique`
 
@@ -154,7 +154,7 @@ Removes duplicate values from an array
 Equivalent to [`array_unique`](http://php.net/manual/en/function.array-unique.php)
 
 * Parameter `$sortFlags`, of type `integer`, defaults to `SplArray::SORT_STRING`
-* Returns `SplArray` (a copy of current array)
+* Returns `array` (a copy of current array)
 
 ### Method `hasKey`
 
@@ -180,7 +180,7 @@ Return all the keys or a subset of the keys of an array
 
 Equivalent to [`array_keys`](http://php.net/manual/en/function.array-keys.php)
 
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `values`
 
@@ -188,7 +188,7 @@ Return all the values of an array
 
 Equivalent to [`array_values`](http://php.net/manual/en/function.array-values.php)
 
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `walk`
 
@@ -216,8 +216,8 @@ Merge one or more arrays
 
 Equivalent to [`array_merge`](http://php.net/manual/en/function.array-merge.php)
 
-* Parameter `...$mergedArray`, of type `SplArray` (variadic)
-* Returns `SplArray` (a copy of current array)
+* Parameter `...$mergedArray`, of type `array` (variadic)
+* Returns `array` (a copy of current array)
 
 ### Method `recursiveMerge`
 
@@ -225,8 +225,8 @@ Merge two or more arrays recursively
 
 Equivalent to [`array_merge_recursive`](http://php.net/manual/en/function.array-merge-recursive.php)
 
-* Parameter `...$mergedArray`, of type `SplArray` (variadic)
-* Returns `SplArray` (a copy of current array)
+* Parameter `...$mergedArray`, of type `array` (variadic)
+* Returns `array` (a copy of current array)
 
 ### Method `replace`
 
@@ -234,8 +234,8 @@ Replaces elements from passed arrays into the first array
 
 Equivalent to [`array_replace`](http://php.net/manual/en/function.array-replace.php)
 
-* Parameter `...$mergedArray`, of type `SplArray` (variadic)
-* Returns `SplArray` (a copy of current array)
+* Parameter `...$mergedArray`, of type `array` (variadic)
+* Returns `array` (a copy of current array)
 
 ### Method `recursiveReplace`
 
@@ -243,8 +243,8 @@ Replaces elements from passed arrays into the first array recursively
 
 Equivalent to [`array_replace_recursive`](http://php.net/manual/en/function.array-replace-recursive.php)
 
-* Parameter `...$mergedArray`, of type `SplArray` (variadic)
-* Returns `SplArray` (a copy of current array)
+* Parameter `...$mergedArray`, of type `array` (variadic)
+* Returns `array` (a copy of current array)
 
 ### Method `search`
 
@@ -275,7 +275,7 @@ Equivalent to [`array_slice`](http://php.net/manual/en/function.array-slice.php)
 * Parameter `$offset`, of type `integer`
 * Parameter `$length`, of type `integer`, defaults to `null`
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `SplArray` (a copy of current array)
+* Returns `array` (a copy of current array)
 
 ### Method `splice`
 
@@ -285,8 +285,8 @@ Equivalent to [`array_splice`](http://php.net/manual/en/function.array-splice.ph
 
 * Parameter `$offset`, of type `integer`
 * Parameter `$length`, of type `integer`, defaults to `null`
-* Parameter `$replacement`, of type `SplArray`, defaults to *empty array*
-* Returns `SplArray` (a copy of current array)
+* Parameter `$replacement`, of type `array`, defaults to *empty array*
+* Returns `array` (a copy of current array)
 
 ### Method `unique`
 
@@ -294,7 +294,7 @@ Removes duplicate values from an array
 
 Equivalent to [`array_unique`](http://php.net/manual/en/function.array-unique.php)
 
-* Returns `SplArray` (a copy of current array)
+* Returns `array` (a copy of current array)
 
 ### Method `extract`
 
@@ -412,7 +412,7 @@ Return the current key and value pair from an array and advance the array cursor
 
 Equivalent to [`each`](http://php.net/manual/en/function.each.php)
 
-* Returns `SplArray`
+* Returns `array`
 
 ### Method `pop`
 
