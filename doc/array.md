@@ -448,3 +448,20 @@ Equivalent to [`array_unshift`](http://php.net/manual/en/function.array-unshift.
 * Parameter `...$items`, of type `mixed` (variadic)
 * Returns `void`
 
+### Method `random`
+
+Pick one random entry out of an array
+
+Equivalent to [`array_rand`](http://php.net/manual/en/function.array-rand.php) when returning 1 item
+
+* Returns `mixed`
+
+### Method `randomSlice`
+
+Pick multiple random entries out of an array
+
+Equivalent to [`array_rand`](http://php.net/manual/en/function.array-rand.php) when returning more than 1 item
+
+* Parameter `$count`, of type `integer`, defaults to `1`
+* Returns `array`
+
