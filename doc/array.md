@@ -1,6 +1,6 @@
 # PHP Scalar objects API - Arrays
 
-## Class `Spl\Array`
+## Virtual class `SplArray`
 
 Implements :
 * `IteratorAggregate`
@@ -8,282 +8,290 @@ Implements :
 * `Serializable`
 * `JsonSerializable`
 * `ArrayAccess`
- 
-### Attribute `size`
-
-Equivalent to `sizeof` and `count`
 
 ### Static method `combine`
 
-Equivalent to `array_combine`
+Equivalent to [`array_combine`](http://php.net/manual/fr/function.array-combine.php)
 
 * Parameter `$columnKey`, of type `Traversable`
 * Parameter `$indexKey`, of type `Traversable`
-* Returns `Spl\Array`
+* Returns `SplArray`
 
-### Static method `​fill`
+### Static method `compact`
 
-Equivalent to `array_​fill`
+Equivalent to [`compact`](http://php.net/manual/fr/function.array-compact.php)
+
+* Parameter `...$vars`, of type `mixed` (variadic)
+* Returns `SplArray`
+
+### Static method `fill`
+
+Equivalent to [`array_​fill`](http://php.net/manual/fr/function.array-fill.php)
 
 * Parameter `$startIndex`, of type `integer`
 * Parameter `$count`, of type `integer`
 * Parameter `$value`, of type `mixed`
-* Returns `Spl\Array`
+* Returns `SplArray`
 
-### Static method `​fillKeys`
+### Static method `fillKeys`
 
-Equivalent to `array_​fill_​keys`
+Equivalent to [`array_​fill_​keys`](http://php.net/manual/fr/function.array-fill-keys.php)
 
-* Parameter `$keys`, of type `Spl\Array`
+* Parameter `$keys`, of type `SplArray`
 * Parameter `$value`, of type `mixed`
-* Returns `Spl\Array`
+* Returns `SplArray`
 
 ### Method `changeKeyCase`
 
-Equivalent to `array_change_key_case`
+Equivalent to [`array_change_key_case`](http://php.net/manual/fr/function.array-change-key-case.php)
 
-* Parameter `$size`, of type `integer`, defaults to `Spl\Array::CASE_LOWER`
+* Parameter `$size`, of type `integer`, defaults to `SplArray::CASE_LOWER`
 * Returns `void`
 
 ### Method `chunk`
 
-Equivalent to `array_chunk`
+Equivalent to [`array_chunk`](http://php.net/manual/fr/function.array-chunk.php)
 
 * Parameter `$size`, of type `integer`
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `Spl\Array`
+* Returns `SplArray`
 
 ### Method `column`
 
-Equivalent to `array_column`
+Equivalent to [`array_column`](http://php.net/manual/fr/function.array-column.php)
 
 * Parameter `$columnKey`, of type `mixed`
 * Parameter `$indexKey`, of type `mixed`
-* Returns `Spl\Array`
+* Returns `SplArray`
 
 ### Method `count`
 
-Equivalent to `count`
+Equivalent to [`sizeof`](http://php.net/manual/fr/function.sizeof.php) and [`count`](http://php.net/manual/fr/function.count.php).
+
+Implements [`Countable::count`](http://php.net/manual/fr/countable.count.php).
 
 * Returns `integer`
 
 ### Method `countValues`
 
-Equivalent to `array_count_values`
+Equivalent to [`array_count_values`](http://php.net/manual/fr/function.array-count-values.php)
 
-* Returns `Spl\Array`
+* Returns `SplArray`
 
-### Method `​flip`
+### Method `flip`
 
-Equivalent to `array_​flip`
+Equivalent to [`array_flip`](http://php.net/manual/fr/function.array-flip.php)
 
-* Returns `Spl\Array` (a copy of current array)
+* Returns `SplArray` (a copy of current array)
 
-### Method `​pad`
+### Method `pad`
 
-Equivalent to `array_​pad`
+Equivalent to [`array_pad`](http://php.net/manual/fr/function.array-pad.php)
 
-* Returns `Spl\Array` (a copy of current array)
+* Returns `SplArray` (a copy of current array)
 
-### Method `​reverse`
+### Method `reverse`
 
-Equivalent to `array_​reverse`
+Equivalent to [`array_reverse`](http://php.net/manual/fr/function.array-reverse.php)
 
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
-* Returns `Spl\Array` (a copy of current array)
+* Returns `SplArray` (a copy of current array)
 
-### Method `​unique`
+### Method `unique`
 
-Equivalent to `array_unique`
+Equivalent to [`array_unique`](http://php.net/manual/fr/function.array-unique.php)
 
-* Parameter `$sortFlags`, of type `integer`, defaults to `SORT_STRING`
-* Returns `Spl\Array` (a copy of current array)
+* Parameter `$sortFlags`, of type `integer`, defaults to `SplArray::SORT_STRING`
+* Returns `SplArray` (a copy of current array)
 
-### Method `​hasKey`
+### Method `hasKey`
 
-Equivalent to `array_​key_​exists` and `key_​exists`
-
-* Parameter `$key`, of type `mixed`
-* Returns `bool`
-
-### Method `​hasValue`
-
-Equivalent to `in_array`
+Equivalent to [`array_key_exists`](http://php.net/manual/fr/function.array-key-exists.php) and [`key_exists`](http://php.net/manual/fr/function.array-key-exists.php)
 
 * Parameter `$key`, of type `mixed`
 * Returns `bool`
 
-### Method `​keys`
+### Method `has`
 
-Equivalent to `array_​keys`
+Equivalent to [`in_array`](http://php.net/manual/fr/function.in-array.php)
 
-* Returns `Spl\Array`
+* Parameter `$key`, of type `mixed`
+* Returns `bool`
 
-### Method `​values`
+### Method `keys`
 
-Equivalent to `array_​values`
+Equivalent to [`array_keys`](http://php.net/manual/fr/function.array-keys.php)
 
-* Returns `Spl\Array`
+* Returns `SplArray`
 
-### Method `​walk`
+### Method `values`
 
-Equivalent to `array_​walk`
+Equivalent to [`array_values`](http://php.net/manual/fr/function.array-values.php)
+
+* Returns `SplArray`
+
+### Method `walk`
+
+Equivalent to [`array_walk`](http://php.net/manual/fr/function.array_walk.php)
 
 * Parameter `$callback`, of type `callable`
 * Parameter `$userdata`, of type `mixed`, defaults to `null`
 * returns `bool`
 
-### Method `​recursiveWalk`
+### Method `recursiveWalk`
 
-Equivalent to `array_​walk_​recursive`
+Equivalent to [`array_walk_recursive`](http://php.net/manual/fr/function.array-walk-recursive.php)
 
 * Parameter `$callback`, of type `callable`
 * Parameter `$userdata`, of type `mixed`, defaults to `null`
 * returns `bool`
 
-### Method `​merge`
+### Method `merge`
 
-Equivalent to `array_​merge`
+Equivalent to [`array_merge`](http://php.net/manual/fr/function.array-merge.php)
 
-* Parameter `...$mergedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array` (a copy of current array)
+* Parameter `...$mergedArray`, of type `SplArray` (variadic)
+* Returns `SplArray` (a copy of current array)
 
 ### Method `recursiveMerge`
 
-Equivalent to `array_​merge_​recursive`
+Equivalent to [`array_merge_recursive`](http://php.net/manual/fr/function.array-merge-recursive.php)
 
-* Parameter `...$mergedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array` (a copy of current array)
+* Parameter `...$mergedArray`, of type `SplArray` (variadic)
+* Returns `SplArray` (a copy of current array)
 
-### Method `​recursiveRreplace`
+### Method `replace`
 
-Equivalent to `array_​replace_​recursive`
+Equivalent to [`array_replace`](http://php.net/manual/fr/function.array-replace.php)
 
-* Parameter `...$mergedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array` (a copy of current array)
+* Parameter `...$mergedArray`, of type `SplArray` (variadic)
+* Returns `SplArray` (a copy of current array)
 
-### Method `​replace`
+### Method `recursiveReplace`
 
-Equivalent to `array_​replace`
+Equivalent to [`array_replace_recursive`](http://php.net/manual/fr/function.array-replace-recursive.php)
 
-* Parameter `...$mergedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array` (a copy of current array)
+* Parameter `...$mergedArray`, of type `SplArray` (variadic)
+* Returns `SplArray` (a copy of current array)
 
-### Method `​search`
+### Method `search`
 
-Equivalent to `array_​search`
+Equivalent to [`array_search`](http://php.net/manual/fr/function.array-search.php)
 
 * Parameter `$needle`, of type `mixed`
 * Parameter `$strict`, of type `boolean`, defaults to `false`
 * Returns `mixed`
 
-### Method `​reduce`
+### Method `reduce`
 
-Equivalent to `array_​reduce`
+Equivalent to [`array_reduce`](http://php.net/manual/fr/function.array-reduce.php)
 
 * Parameter `$callback`, of type `callable`
 * Parameter `$userdata`, of type `mixed`, defaults to `null`
 * returns `mixed`
 
-### Method `​slice`
+### Method `slice`
 
-Equivalent to `array_​slice`
+Equivalent to [`array_slice`](http://php.net/manual/fr/function.array-slice.php)
 
 * Parameter `$offset`, of type `integer`
 * Parameter `$length`, of type `integer`, defaults to `null`
 * Parameter `$preserveKeys`, of type `boolean`, defaults to `false`
+* Returns `SplArray` (a copy of current array)
 
-### Method `​splice`
+### Method `splice`
 
-Equivalent to `array_​splice`
+Equivalent to [`array_splice`](http://php.net/manual/fr/function.array-splice.php)
 
 * Parameter `$offset`, of type `integer`
 * Parameter `$length`, of type `integer`, defaults to `null`
-* Parameter `$replacement`, of type `Spl\Array`, defaults to *empty array*
+* Parameter `$replacement`, of type `SplArray`, defaults to *empty array*
+* Returns `SplArray` (a copy of current array)
 
+### Method `unique`
 
+Equivalent to [`array_unique`](http://php.net/manual/fr/function.array-unique.php)
 
-
-### Method `​map`
-
-Equivalent to `array_​map`
-
-
-### Method `​unique`
-
-Equivalent to `array_​unique`
-
-
-### Method `compact`
-
-Equivalent to `compact`
-
+* Returns `SplArray` (a copy of current array)
 
 ### Method `extract`
 
-Equivalent to `extract`
+Equivalent to [`extract`](http://php.net/manual/fr/function.extract.php)
 
+* Parameter `$flags`, of type `integer`, defaults to `SplArray::EXTR_OVERWRITE`
+* Parameter `$prefix`, of type `string`, defaults to `null`
+* Returns `integer`
 
+### Method `sum`
 
+Equivalent to [`array_sum`](http://php.net/manual/fr/function.array-sum.php)
 
+* Returns `number`
 
+### Method `product`
 
-### Method `​sum`
+Equivalent to [`array_product`](http://php.net/manual/fr/function.array-product.php)
 
-Equivalent to `array_​sum`
-
-
-### Method `​product`
-
-Equivalent to `array_​product`
-
-
-
-
-
-### Method `key`
-
-Equivalent to `key`
-
+* Returns `number`
 
 ### Method `range`
 
-Equivalent to `range`
+Equivalent to [`range`](http://php.net/manual/fr/function.range.php)
 
-
-### Method `next`
-
-Equivalent to `next`
-
-
-### Method `pos`
-
-Equivalent to `pos`
-
-
-### Method `prev`
-
-Equivalent to `prev`
-
-
-### Method `end`
-
-Equivalent to `end`
-
-
-### Method `reset`
-
-Equivalent to `reset`
-
+* Parameter `$start`, of type `mixed`
+* Parameter `$end`, of type `mixed`
+* Parameter `$step`, of type `numeric`, defaults to `1`
+* Returns `integer`
 
 ### Method `current`
 
-Equivalent to `current`
+Equivalent to [`current`](http://php.net/manual/fr/function.current.php) and [`pos`](http://php.net/manual/fr/function.pos.php)
+
+Implements [`ArrayIterator::current`](http://php.net/manual/fr/arrayiterator.current.php)
+
+### Method `key`
+
+Equivalent to [`key`](http://php.net/manual/fr/function.key.php)
+
+Implements [`ArrayIterator::key`](http://php.net/manual/fr/arrayiterator.key.php)
+
+### Method `next`
+
+Equivalent [`next`](http://php.net/manual/fr/function.next.php)
+
+Implements [`ArrayIterator::next`](http://php.net/manual/fr/arrayiterator.next.php)
+
+### Method `prev`
+
+Reverse method of [`next`](http://php.net/manual/fr/function.next.php)
+
+### Method `rewind`
+
+Equivalent [`reset`](http://php.net/manual/fr/function.reset.php)
+
+Implements [`ArrayIterator::reset`](http://php.net/manual/fr/arrayiterator.reset.php)
+
+### Method `seek`
+
+Implements [`ArrayIterator::seek`](http://php.net/manual/fr/arrayiterator.seek.php)
+
+### Method `valid`
+
+Implements [`ArrayIterator::reset`](http://php.net/manual/fr/arrayiterator.valid.php)
+
+### Method `end`
+
+Equivalent to [`end`](http://php.net/manual/fr/function.end.php)
+
+### Method `begin`
+
+Reverse method of [`end`](http://php.net/manual/fr/function.end.php)
+
+### Method `pair`
+
+Equivalent to [`each`](http://php.net/manual/fr/function.each.php)
 
 
-### Method `each`
-
-Equivalent to `each`
 
 
 
@@ -291,24 +299,29 @@ Equivalent to `each`
 
 
 
-### Method `​pop`
-
-Equivalent to `array_​pop`
 
 
-### Method `​push`
-
-Equivalent to `array_​push`
 
 
-### Method `​shift`
 
-Equivalent to `array_​shift`
+### Method `pop`
+
+Equivalent to `array_pop`
 
 
-### Method `​unshift`
+### Method `push`
 
-Equivalent to `array_​unshift`
+Equivalent to `array_push`
+
+
+### Method `shift`
+
+Equivalent to `array_shift`
+
+
+### Method `unshift`
+
+Equivalent to `array_unshift`
 
 
 
