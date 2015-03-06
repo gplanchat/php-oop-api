@@ -1,6 +1,6 @@
 
-## Abstract class `Spl\ArraySorter`
+## Abstract class `SplArrayFilter`
 
 ### Method `​filter`
 
-Equivalent to `array_​filter`
+Equivalent to `array_filter`
