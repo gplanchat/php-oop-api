@@ -70,36 +70,51 @@ Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php)
 * Parameter `$array`, of type `array`
 * Returns `array`
 
-
-
-
-
-
-
-
-## Class `SplNaturalCaseArraySorter`
+## Class `SplStandardArraySorter`
 
 ### Method `sort`
 
-Equivalent to [`natcasesort`](http://php.net/manual/en/function.natcasesort.php)
+Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
 
-## Class `NaturalArraySorter`
-
-### Method `sort`
-
-Equivalent to [`natsort`](http://php.net/manual/en/function.natsort.php)
-
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplReverseNaturalCaseArraySorter`
+## Class `SplReverseStandardArraySorter`
 
 ### Method `sort`
 
 Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplCustomArraySorter`
+
+### Method `sort`
+
+Equivalent to [`usort`](http://php.net/manual/en/function.usort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplCustomKeyArraySorter`
+
+### Method `__construct`
+
+* Parameter `$callback`, of type `callable`
+
+## Class `SplCustomAssociativeArraySorter`
+
+### Method `sort`
+
+Equivalent to [`uasort`](http://php.net/manual/en/function.uasort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+### Method `sort`
+
+Equivalent to [`uksort`](http://php.net/manual/en/function.uksort.php)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
@@ -113,38 +128,20 @@ Equivalent to [`shuffle`](http://php.net/manual/en/function.shuffle.php)
 * Parameter `$array`, of type `array`
 * Returns `array`
 
-## Class `SplStandardArraySorter`
+## Class `SplNaturalCaseSensitiveArraySorter`
 
 ### Method `sort`
 
-Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
+Equivalent to [`natcasesort`](http://php.net/manual/en/function.natcasesort.php)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
 
-## Class `SplCustomKeyArraySorter`
+## Class `SplNaturalArraySorter`
 
 ### Method `sort`
 
-Equivalent to [`uksort`](http://php.net/manual/en/function.uksort.php)
-
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplCustomAssociativeArraySorter`
-
-### Method `sort`
-
-Equivalent to [`uasort`](http://php.net/manual/en/function.uasort.php)
-
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplCustomArraySorter`
-
-### Method `sort`
-
-Equivalent to [`usort`](http://php.net/manual/en/function.usort.php)
+Equivalent to [`natsort`](http://php.net/manual/en/function.natsort.php)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
