@@ -2,7 +2,9 @@
 
 This document specifies the `array` scalar type's object-oriented interface for PHP 7+.
 
-This is *NOT* a reimplementation of the array type into objects, it is a thin layer above the current array API, availiable in the userspace.
+This **IS NOT** a reimplementation of the array type into objects.
+
+It **IS** a thin layer above the current array API, availiable in the userspace and inter-operable with the current API.
 
 Example :
 
@@ -1116,6 +1118,29 @@ Equivalent to [`array_shift`](http://php.net/manual/en/function.array-shift.php)
 
 * Returns `mixed`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'banana'
+];
+
+$result = $myArray->shift();
+var_dump($result, $myArray);
+```
+
+```
+string(3) "apple"
+array(2) {
+    0 => 'melon'
+    1 => 'banana'
+}
+```
+
 ### Method `unshift`
 
 Prepend one or more elements to the beginning of an array
@@ -1125,6 +1150,31 @@ Equivalent to [`array_unshift`](http://php.net/manual/en/function.array-unshift.
 * Parameter `...$items`, of type `mixed` (variadic)
 * Returns `void`
 
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'apple',
+    'melon',
+    'banana'
+];
+
+$myArray->unshift('pineapple');
+var_dump($result, $myArray);
+```
+
+```
+string(3) "apple"
+array(2) {
+    0 => 'pineapple',
+    1 => 'melon',
+    2 => 'banana',
+    3 => 'banana'
+}
+```
+
 ### Method `random`
 
 Pick one random entry out of an array
@@ -1132,6 +1182,25 @@ Pick one random entry out of an array
 Equivalent to [`array_rand`](http://php.net/manual/en/function.array-rand.php) when returning 1 item
 
 * Returns `mixed`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+
+$result = $myArray->random();
+var_dump($random);
+```
+
+```
+string(3) "melon"
+```
 
 ### Method `randomSlice`
 
@@ -1141,4 +1210,26 @@ Equivalent to [`array_rand`](http://php.net/manual/en/function.array-rand.php) w
 
 * Parameter `$count`, of type `integer`, defaults to `1`
 * Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+
+$result = $myArray->randomSlice(2);
+var_dump($result);
+```
+
+```
+array(2) {
+    0 => 'banana',
+    1 => 'apple'
+}
+```
 
