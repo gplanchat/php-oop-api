@@ -1356,3 +1356,32 @@ array(2) {
 Filters elements of an array using a callback function
 
 Equivalent to [`array_filter`](http://php.net/manual/en/function.array-filter.php)
+
+
+### Method `implode`
+
+Join array elements with a string
+
+Equivalent to [`implode`](http://php.net/manual/fr/function.implode.php) and [`join`](http://php.net/manual/fr/function.join.php)
+
+* Parameter `$glue`, of type `string`, defaults to *empty string*
+* Returns `array`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+
+$result = $myArray->implode(',');
+var_dump($result);
+```
+
+```
+string(18) 'apple,melon,banana'
+```
