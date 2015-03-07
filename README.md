@@ -31,3 +31,7 @@ user-defined rules.
 
 Ability to compare arrays, by keys, values, both, depending on user-defined comparison functions, ect...
 
+### [Decorator API](doc/array-decorator.md)
+
+Ability to decorate arrays, changing its visible behavior whithout the need for reimplementing legacy or vendor code
+
