@@ -1,4 +1,4 @@
-# PHP Scalar objects API - array decorators
+# PHP 7+ Object-oriented API - array decorators
 
 ## Abstract class SplArrayDecorator
 

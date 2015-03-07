@@ -1,4 +1,4 @@
-# PHP Scalar objects API - Computing array differences
+# PHP 7+ Object-oriented API - Computing array differences
 
 ## Interface `SplArrayDiff`
 

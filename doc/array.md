@@ -1,4 +1,4 @@
-# PHP Scalar objects API - Arrays
+# PHP 7+ Object-oriented API - Arrays
 
 This document specifies the `array` scalar type's object-oriented interface for PHP 7+.
 

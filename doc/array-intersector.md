@@ -1,4 +1,4 @@
-# PHP Scalar objects API - Array intersectors
+# PHP 7+ Object-oriented API - Array intersectors
 
 Array intersectors 
 

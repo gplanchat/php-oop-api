@@ -1,4 +1,4 @@
-# PHP Scalar objects API - Array sorters
+# PHP 7+ Object-oriented API - Array sorters
 
 This document describes the `array` scalar type's object-oriented sorting interface
 
