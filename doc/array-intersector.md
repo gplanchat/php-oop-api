@@ -2,6 +2,31 @@
 
 Array intersectors 
 
+```php
+<?php
+
+$array1 = [2, 4, 6, 8, 10, 12];
+$array2 = [1, 2, 3, 4, 5, 6];
+
+$intersector = new SplByValueArrayIntersector();
+var_dump($intersector->intersect($array1, $array2));
+var_dump($intersector->intersect($array2, $array1));
+```
+
+```
+array(3) {
+  [0]=> int(2)
+  [1]=> int(4)
+  [2]=> int(6)
+}
+
+array(3) {
+  [1]=> int(2)
+  [3]=> int(4)
+  [5]=> int(6)
+}
+```
+
 ## Interface `SplArrayIntersector`
 
 ### Method `intersect`
