@@ -234,7 +234,7 @@ var_dump('     apple '->trimLeft());
 string(6) "apple "
 ```
 
-### Method `str_pad`
+### Method `pad`
 
 Pad a string to a certain length with another string
 
@@ -257,6 +257,163 @@ var_dump('apples'->pad(12, SplString::PAD_BOTH));
 string(12) "   apples   "
 ```
 
+### Method `chunkSplit`
+
+Split a string into smaller chunks
+
+Equivalent to [`split`](http://php.net/manual/fr/function.chunk-split.php)
+
+* Parameter `$chunkLength`, of type `integer`, defaults to `76`
+* Parameter `$separator`, of type `string`, defaults to `\r\n`
+* Returns `string`
+
+Example:
+
+```php
+<?php
+
+var_dump('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'->chunkSplit(10));
+```
+
+```
+string(12) "ABCDEFGHIJ
+KLMNOPQRST
+UVWXYZabcd
+efghijklmn
+opqrstuvwx
+yz01234567
+89"
+```
+
+### Method `shuffle`
+
+Randomly shuffles a string
+
+Equivalent to [`str_shuffle`](http://php.net/manual/fr/function.str-shuffle.php)
+
+* Returns `string`
+
+Example:
+
+```php
+<?php
+
+var_dump('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'->shuffle());
+```
+
+```
+string(62) "iBjaVeQ6hFwRqMDXISrW3ZAdGTmLkYEvJ1x89sU4fn72bopCOlgzc05KPtuHNy"
+```
+
+### Method `split`
+
+Convert a string to an array
+
+Equivalent to [`str_split`](http://php.net/manual/fr/function.str-split.php)
+
+* Parameter `$chunkLength`, of type `integer`, defaults to `1`
+* Returns `array`
+
+Example:
+
+```php
+<?php
+
+var_dump('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'->split(10));
+```
+
+```
+array(7) {
+    0 => "ABCDEFGHIJ",
+    1 => "KLMNOPQRST",
+    2 => "UVWXYZabcd",
+    3 => "efghijklmn",
+    4 => "opqrstuvwx",
+    5 => "yz01234567",
+    6 => "89"
+}
+```
+
+### Method `wordCount`
+
+Return information about words used in a string
+
+Equivalent to [`str_word_count`](http://php.net/manual/fr/function.str-word-count.php), with value `0` passed to the `$format` parameter
+
+* Parameter `$charList`, of type `string`, defaults to *empty string*
+* Returns `integer`
+
+Example:
+
+```php
+<?php
+
+var_dump('Hello, friend, you are looking good today'->wordCount());
+```
+
+```
+int(7)
+```
+
+### Method `words`
+
+Return information about words used in a string
+
+Equivalent to [`str_word_count`](http://php.net/manual/fr/function.str-word-count.php):
+* natively with value `2` passed to the `$format` parameter.
+* applying then the method `->values()` on the returned array brings the same functionality than the value `1` passed to the `$format` parameter.
+
+* Parameter `$charList`, of type `string`, defaults to *empty string*
+* Returns `integer`
+
+Example:
+
+```php
+<?php
+
+var_dump('Hello, friend, you are looking good today'->words());
+```
+
+```
+array(7) {
+    0 => "Hello",
+    7 => "friend",
+    15 => "you",
+    19 => "are",
+    23 => "looking",
+    30 => "good",
+    35 => "today"
+}
+```
+
+### Method `explode`
+
+Split a string by string
+
+Equivalent to [`explode`](http://php.net/manual/fr/function.explode.php)
+
+* Parameter `$separator`, of type `string`
+* Parameter `$limit`, of type `integer`
+* Returns `array`
+
+Example:
+
+```php
+<?php
+
+var_dump('Hello, friend, you are looking good today'->explode(','));
+```
+
+```
+array(3) {
+    0 => "Hello",
+    1 => "friend",
+    2 => "you are looking good today"
+}
+```
+
+
+
 
 
 
@@ -268,49 +425,6 @@ string(12) "   apples   "
 Return a specific character
 
 Equivalent to [`chr`](http://php.net/manual/fr/function.chr.php)
-
-
-### Method `chunk_split`
-
-Split a string into smaller chunks
-
-Equivalent to [`chunk_split`](http://php.net/manual/fr/function.chunk-split.php)
-
-
-### Method `convert_cyr_string`
-
-Convert from one Cyrillic character set to another
-
-Equivalent to [`convert_cyr_string`](http://php.net/manual/fr/function.convert-cyr-string.php)
-
-
-### Method `convert_uudecode`
-
-Decode a uuencoded string
-
-Equivalent to [`convert_uudecode`](http://php.net/manual/fr/function.convert-uudecode.php)
-
-
-### Method `convert_uuencode`
-
-Uuencode a string
-
-Equivalent to [`convert_uuencode`](http://php.net/manual/fr/function.convert-uuencode.php)
-
-
-
-### Method `echo`
-
-Output one or more strings
-
-Equivalent to [`echo`](http://php.net/manual/fr/function.echo.php)
-
-
-### Method `explode`
-
-Split a string by string
-
-Equivalent to [`explode`](http://php.net/manual/fr/function.explode.php)
 
 
 ### Method `implode`
@@ -390,27 +504,6 @@ Output a string
 Equivalent to [`print`](http://php.net/manual/fr/function.print.php)
 
 
-### Method `quoted_printable_decode`
-
-Convert a quoted-printable string to an 8 bit string
-
-Equivalent to [`quoted_printable_decode`](http://php.net/manual/fr/function.quoted-printable-decode.php)
-
-
-### Method `quoted_printable_encode`
-
-Convert a 8 bit string to a quoted-printable string
-
-Equivalent to [`quoted_printable_encode`](http://php.net/manual/fr/function.quoted-printable-encode.php)
-
-
-### Method `quotemeta`
-
-Quote meta characters
-
-Equivalent to [`quotemeta`](http://php.net/manual/fr/function.quotemeta.php)
-
-
 ### Method `setlocale`
 
 Set locale information
@@ -458,34 +551,6 @@ Equivalent to [`str_repeat`](http://php.net/manual/fr/function.str-repeat.php)
 Replace all occurrences of the search string with the replacement string
 
 Equivalent to [`str_replace`](http://php.net/manual/fr/function.str-replace.php)
-
-
-### Method `str_rot13`
-
-Perform the rot13 transform on a string
-
-Equivalent to [`str_rot13`](http://php.net/manual/fr/function.str-rot13.php)
-
-
-### Method `str_shuffle`
-
-Randomly shuffles a string
-
-Equivalent to [`str_shuffle`](http://php.net/manual/fr/function.str-shuffle.php)
-
-
-### Method `str_split`
-
-Convert a string to an array
-
-Equivalent to [`str_split`](http://php.net/manual/fr/function.str-split.php)
-
-
-### Method `str_word_count`
-
-Return information about words used in a string
-
-Equivalent to [`str_word_count`](http://php.net/manual/fr/function.str-word-count.php)
 
 
 ### Method `strcoll`
@@ -572,13 +637,6 @@ Find the first occurrence of a string
 Equivalent to [`strstr`](http://php.net/manual/fr/function.strstr.php) and [`strchr`](http://php.net/manual/fr/function.strchr.php)
 
 
-### Method `strtok`
-
-Tokenize string
-
-Equivalent to [`strtok`](http://php.net/manual/fr/function.strtok.php)
-
-
 ### Method `strtr`
 
 Translate characters or replace substrings
@@ -636,6 +694,13 @@ Equivalent to [`hebrev`](http://php.net/manual/fr/function.hebrev.php)
 Convert logical Hebrew text to visual text with newline conversion
 
 Equivalent to [`hebrevc`](http://php.net/manual/fr/function.hebrevc.php)
+
+
+### Method `convert_cyr_string`
+
+Convert from one Cyrillic character set to another
+
+Equivalent to [`convert_cyr_string`](http://php.net/manual/fr/function.convert-cyr-string.php)
 
 
 
@@ -738,6 +803,27 @@ Calculate the md5 hash of a string
 Equivalent to [`md5`](http://php.net/manual/fr/function.md5.php)
 
 
+### Method `str_rot13`
+
+Perform the rot13 transform on a string
+
+Equivalent to [`str_rot13`](http://php.net/manual/fr/function.str-rot13.php)
+
+
+
+
+
+
+--- Tokenization & parsing
+
+
+### Method `strtok`
+
+Tokenize string
+
+Equivalent to [`strtok`](http://php.net/manual/fr/function.strtok.php)
+
+
 
 
 
@@ -813,6 +899,41 @@ Equivalent to [`htmlspecialchars_decode`](http://php.net/manual/fr/function.html
 Convert special characters to HTML entities
 
 Equivalent to [`htmlspecialchars`](http://php.net/manual/fr/function.htmlspecialchars.php)
+
+
+### Method `convert_uudecode`
+
+Decode a uuencoded string
+
+Equivalent to [`convert_uudecode`](http://php.net/manual/fr/function.convert-uudecode.php)
+
+
+### Method `convert_uuencode`
+
+Uuencode a string
+
+Equivalent to [`convert_uuencode`](http://php.net/manual/fr/function.convert-uuencode.php)
+
+
+### Method `quoted_printable_decode`
+
+Convert a quoted-printable string to an 8 bit string
+
+Equivalent to [`quoted_printable_decode`](http://php.net/manual/fr/function.quoted-printable-decode.php)
+
+
+### Method `quoted_printable_encode`
+
+Convert a 8 bit string to a quoted-printable string
+
+Equivalent to [`quoted_printable_encode`](http://php.net/manual/fr/function.quoted-printable-encode.php)
+
+
+### Method `quotemeta`
+
+Quote meta characters
+
+Equivalent to [`quotemeta`](http://php.net/manual/fr/function.quotemeta.php)
 
 
 
