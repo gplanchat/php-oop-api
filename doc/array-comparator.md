@@ -24,26 +24,27 @@ If the `$callback` parameter is not specified or null, the class behaves like `a
 * Parameter `...$comparedArray`, of type `SplArray` (variadic)
 * Returns `SplArray`
 
-
-
-
 ## Class `SplAssociativeArrayDiff`
 
-Equivalent to [`array_diff_assoc`](http://php.net/manual/en/function.array-diff-assoc.php)
+Equivalent to [`array_diff_assoc`](http://php.net/manual/en/function.array-diff-assoc.php) and [`array_udiff_assoc`](http://php.net/manual/en/function.array-udiff-assoc.php) and [`array_diff_uassoc`](http://php.net/manual/en/function.array-diff-uassoc.php) and [`array_udiff_uassoc`](http://php.net/manual/en/function.array-udiff-uassoc.php)
+
+* If the `$keyCallback` and `$valueCallback` parameters are not specified or null, the class behaves like `array_diff_assoc`
+* else if `$keyCallback` is specified and `$valueCallback` parameter is not specified or null it behaves like `array_diff_uassoc`
+* else if `$keyCallback` is not specified or null and `$valueCallback` is specified it behaves like `array_udiff_assoc`
+* else, both `$keyCallback` and `$valueCallback` are specified, it behaves like `array_udiff_uassoc`
+
+### Method `__construct`
+
+* Parameter `$keyCallback`, of type `callable`, defaults to `null`
+* Parameter `$valueCallback`, of type `callable`, defaults to `null`
 
 ### Method `diff`
 
 * Parameter `...$comparedArray`, of type `SplArray` (variadic)
 * Returns `SplArray`
+* 
 
-## Class `SplCustomAssociativeArrayDiff`
 
-Equivalent to [`array_diff_uassoc`](http://php.net/manual/en/function.array-udiff-assoc.php)
-
-### Method `diff`
-
-* Parameter `...$comparedArray`, of type `SplArray` (variadic)
-* Returns `SplArray`
 
 
 
