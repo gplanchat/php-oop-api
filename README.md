@@ -1,4 +1,4 @@
-# PHP 7+ Object-oriented API for Scalar and Arrays
+# PHP 7+ Object-oriented API for Scalar, String and Arrays
 
 These documents describes a new API for scalar values in PHP, fully object-oriented,
 but keeping in mind the interoperability with PHP's historic procedural API. This API
