@@ -1,4 +1,4 @@
-
+# PHP Scalar objects API - Computing array differences
 
 ## Interface `SplArrayDiff`
 
@@ -11,16 +11,34 @@ Common method for each derivative class, that has to be implemented.
 
 ## Class `SplValueArrayDiff`
 
-Equivalent to [`array_diff`](http://php.net/manual/en/function.array-diff.php)
+Equivalent to [`array_diff`](http://php.net/manual/en/function.array-diff.php) and [`array_udiff`](http://php.net/manual/en/function.array-udiff.php)
+
+If the `$callback` parameter is not specified or null, the class behaves like `array_diff`, else it behaves like `array_udiff`.
+
+### Method `__construct`
+
+* Parameter `$callback`, of type `callable`, defaults to `null`
 
 ### Method `diff`
 
 * Parameter `...$comparedArray`, of type `SplArray` (variadic)
 * Returns `SplArray`
 
-## Class `SplCustomValueArrayDiff`
 
-Equivalent to [`array_udiff`](http://php.net/manual/en/function.array-udiff.php)
+
+
+## Class `SplAssociativeArrayDiff`
+
+Equivalent to [`array_diff_assoc`](http://php.net/manual/en/function.array-diff-assoc.php)
+
+### Method `diff`
+
+* Parameter `...$comparedArray`, of type `SplArray` (variadic)
+* Returns `SplArray`
+
+## Class `SplCustomAssociativeArrayDiff`
+
+Equivalent to [`array_diff_uassoc`](http://php.net/manual/en/function.array-udiff-assoc.php)
 
 ### Method `diff`
 
