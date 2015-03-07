@@ -11,11 +11,35 @@ extension for the method of attaching a class to a special scalar type and from 
 
 Every functionality maps to a currently existing functionnality in the procedural API and must behave the same way.
 
+## The Scalar API
+
+This API comes with all the functionnalities you will need to interact with a scalar, these classes
+are already availiable in the [PECL SPL Types extension](http://php.net/manual/en/book.spl-types.php).
+
+One difference to add here is the creation of a new class called `SplNumber`, parent of the classes below :
+
+* `SplInt`
+* `SplFloat`
+* `SplBool`
+
+This API also comes with a `SplEnum` special type, built to bring the enum construct.
+
+## The String API
+
+### [Base API](doc/string.md)
+
+This base API comes with all the base functionnalities you will need to interact with a string, these are
+methods of an `SplString` class availiable in the [PECL SPL Types extension](http://php.net/manual/en/book.spl-types.php) and ehances it with a fill API, independent from classic string functions.
+
+### [Decorator API](doc/string-decorator.md)
+
+This API comes with fluent string escaping (HTML, SQL, console, ect...)
+
 ## The Array API
 
 ### [Base API](doc/array.md)
 
-This base API comes with all the base functionnalities you will need to interact with an object, these are
+This base API comes with all the base functionnalities you will need to interact with an array, these are
 methods of an `SplArray` class.
 
 ### [Sorting API](doc/array-sorter.md)
@@ -34,4 +58,3 @@ Ability to compare arrays, by keys, values, both, depending on user-defined comp
 ### [Decorator API](doc/array-decorator.md)
 
 Ability to decorate arrays, changing its visible behavior whithout the need for reimplementing legacy or vendor code
-
