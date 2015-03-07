@@ -47,6 +47,8 @@ All the hashing and cyphering API (md5, sha, ect...)
 
 ## The Array API
 
+This is *NOT* a reimplementation of `ArrayObject`, this API would in fact make it useless.
+
 ### [Base API](doc/array.md)
 
 This base API comes with all the base functionnalities you will need to interact with an array, these are
