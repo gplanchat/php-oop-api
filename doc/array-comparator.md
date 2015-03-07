@@ -1,13 +1,34 @@
 
 
-## Class `Spl\ArrayComparator`
+## Interface `SplArrayDiff`
 
-### Method `compare`
+### Method `diff`
 
-Equivalent to `array_diff`
+Common method for each derivative class, that has to be implemented.
 
-* Parameter `...$comparedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array`
+* Parameter `...$comparedArray`, of type `SplArray` (variadic)
+* Returns `SplArray`
+
+## Class `SplValueArrayDiff`
+
+Equivalent to [`array_diff`](http://php.net/manual/en/function.array-diff.php)
+
+### Method `diff`
+
+* Parameter `...$comparedArray`, of type `SplArray` (variadic)
+* Returns `SplArray`
+
+## Class `SplCustomValueArrayDiff`
+
+Equivalent to [`array_udiff`](http://php.net/manual/en/function.array-udiff.php)
+
+### Method `diff`
+
+* Parameter `...$comparedArray`, of type `SplArray` (variadic)
+* Returns `SplArray`
+
+
+
 
 ### Method `compareKeys`
 
