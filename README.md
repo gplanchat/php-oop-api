@@ -27,7 +27,7 @@ Brings sorting functionalities to arrays, from basic numeric or alphanumeric sor
 These classes brings the array intersection routines, from simple keyed-intersection to more complex and
 user-defined rules.
 
-### [Filtering API](doc/array-filter.md)
+### [Comparator API](doc/array-comparator.md)
 
-Ability to filter arrays.
+Ability to compare arrays, by keys, values, both, depending on user-defined comparison functions, ect...
 
