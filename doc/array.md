@@ -1351,3 +1351,8 @@ array(2) {
 }
 ```
 
+### Method `​filter`
+
+Filters elements of an array using a callback function
+
+Equivalent to [`array_filter`](http://php.net/manual/en/function.array-filter.php)
