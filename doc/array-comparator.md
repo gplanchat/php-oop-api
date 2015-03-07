@@ -42,54 +42,18 @@ Equivalent to [`array_diff_assoc`](http://php.net/manual/en/function.array-diff-
 
 * Parameter `...$comparedArray`, of type `SplArray` (variadic)
 * Returns `SplArray`
-* 
 
+## Class `SplKeyArrayDiff`
 
+Equivalent to [`array_diff_key`](http://php.net/manual/en/function.array-diff-key.php) and [`array_diff_ukey`](http://php.net/manual/en/function.array-diff-ukey.php)
 
+If the `$callback` parameter is not specified or null, the class behaves like `array_diff_key`, else it behaves like `array_diff_ukey`.
 
+### Method `__construct`
 
+* Parameter `$callback`, of type `callable`, defaults to `null`
 
-### Method `compareKeys`
+### Method `diff`
 
-Equivalent to `array_diff_key`
-
-* Parameter `...$comparedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array`
-
-### Method `compareBoth`
-
-Equivalent to `array_diff_assoc`
-
-* Parameter `$callback`, of type `callable`
-* Parameter `...$comparedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array`
-
-### Method `compareKeysCustom`
-
-Equivalent to `array_diff_ukey`
-
-* Parameter `$callback`, of type `callable`
-* Parameter `...$comparedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array`
-
-### Method `compareBothCustom`
-
-Equivalent to `array_diff_uassoc`
-
-* Parameter `...$comparedArray`, of type `Spl\Array` (variadic)
-* Returns `Spl\Array`
-
-
-### Method `​udiff_​assoc`
-
-Equivalent to `array_​udiff_​assoc`
-
-
-### Method `​udiff_​uassoc`
-
-Equivalent to `array_​udiff_​uassoc`
-
-
-### Method `​udiff`
-
-Equivalent to `array_​udiff`
+* Parameter `...$comparedArray`, of type `SplArray` (variadic)
+* Returns `SplArray`
