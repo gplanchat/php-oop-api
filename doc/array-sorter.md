@@ -41,19 +41,7 @@ Extends :
 ### Method `asort`
 
 Equivalent to [`asort`](http://php.net/manual/en/function.asort.php)
-
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplAlphaReverseArraySorter`
-
-Extends :
-
-* `SplArraySorter`
-
-### Method `sort`
-
-Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php)
+Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php) (in conjunction with a `SplReverseArraySorter`)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
@@ -69,19 +57,7 @@ Extends :
 Equivalent to `ksort`
 
 Equivalent to [`ksort`](http://php.net/manual/en/function.ksort.php)
-
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplReverseKeyArraySorter`
-
-Extends :
-
-* `SplArraySorter`
-
-### Method `sort`
-
-Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php)
+Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php) (in conjunction with a `SplReverseArraySorter`)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
@@ -95,19 +71,7 @@ Extends :
 ### Method `sort`
 
 Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
-
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplReverseStandardArraySorter`
-
-Extends :
-
-* `SplArraySorter`
-
-### Method `sort`
-
-Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php)
+Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php) (in conjunction with a `SplReverseArraySorter`)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
@@ -229,6 +193,23 @@ Removes multiple internal sorters from the multi-sorter
 ### Method `sort`
 
 Equivalent to [`array_multisort`](http://php.net/manual/en/function.array-multisort.php)
+
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplReverseArraySorter`
+
+Extends :
+
+* `SplArraySorter`
+
+### Method `__construct`
+
+Initantiates a reverse sorter, with in parameter the internal sorter
+
+* Parameter `$sorter`, of type `SplArraySorter`
+
+### Method `sort`
 
 * Parameter `$array`, of type `array`
 * Returns `array`
