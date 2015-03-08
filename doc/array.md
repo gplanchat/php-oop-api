@@ -13,7 +13,7 @@ would be equivalent to a `new ArrayIterator($array)`.
 By the way, this interface would make useless the classe `ArrayObject`.
 
 It also brings the need to change the `ArrayIterator` class and transform it to implement the `BidirectionalSeekableIterator`
-interface and remove all sorting-related methods that would then become useless.
+interface and remove all sorting-related methods that would then become useless due to the [sorting API](sorting.md).
 
 Example :
 
