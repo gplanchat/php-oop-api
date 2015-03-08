@@ -27,8 +27,7 @@ class UserlandQuickSortAlgorithmSorter
             $pivot = clone $last;
             $wall = $this->partition($collection, $first, $last);
 
-            $this->quickSort($collection, $wall, (clone $pivot)->previous());
-            $this->quickSort($collection, (clone $pivot)->next(), $last);
+            $this->quickSort($collection, $wall, $pivot);
 
             $iterator->next();
         }
