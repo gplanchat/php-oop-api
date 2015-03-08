@@ -7,8 +7,7 @@ bringing inversion of control to any routine, making it possible to change the a
 seeking mode or applying filters on the fly, without the need for the routine to be aware of it.
 
 Implements :
-* `IteratorAggregate`
-* `Countable`
+* `SortableAggregate`
 * `Serializable`
 * `JsonSerializable`
 * `ArrayAccess`
