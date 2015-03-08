@@ -24,6 +24,8 @@ One difference to add here is the creation of a new class called `SplNumber`, pa
 
 This API also comes with a `SplEnum` special type, built to bring the enum construct.
 
+**todo**
+
 ## The String API
 
 ### [Base API](doc/string.md)
@@ -31,11 +33,21 @@ This API also comes with a `SplEnum` special type, built to bring the enum const
 This base API comes with all the base functionnalities you will need to interact with a string, these are
 methods of an `SplString` class availiable in the [PECL SPL Types extension](http://php.net/manual/en/book.spl-types.php) and ehances it with a fill API, independent from classic string functions.
 
-### [Decorator API](doc/string-decorator.md)
+### Decorator API
 
-This API comes with fluent string escaping (HTML, SQL, console, ect...)
+This API implements fluent string escaping and transformation (HTML, SQL, console, ect...)
+
+**todo**
+
+### Cyphering and hashing API
+
+All the hashing and cyphering API (md5, sha, ect...)
+
+**todo**
 
 ## The Array API
+
+This is *NOT* a reimplementation of `ArrayObject`, this API would in fact make it useless.
 
 ### [Base API](doc/array.md)
 

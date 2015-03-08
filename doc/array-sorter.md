@@ -29,6 +29,7 @@ array(5) {
 
 ### Abstract method `sort`
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -40,21 +41,11 @@ Extends :
 
 ### Method `asort`
 
-Equivalent to [`asort`](http://php.net/manual/en/function.asort.php)
+Equivalent to:
+* [`asort`](http://php.net/manual/en/function.asort.php)
+* [`arsort`](http://php.net/manual/en/function.arsort.php) (in conjunction with a `SplReverseArraySorter`)
 
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplAlphaReverseArraySorter`
-
-Extends :
-
-* `SplArraySorter`
-
-### Method `sort`
-
-Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php)
-
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -68,21 +59,11 @@ Extends :
 
 Equivalent to `ksort`
 
-Equivalent to [`ksort`](http://php.net/manual/en/function.ksort.php)
+Equivalent to:
+* [`ksort`](http://php.net/manual/en/function.ksort.php)
+* [`krsort`](http://php.net/manual/en/function.krsort.php) (in conjunction with a `SplReverseArraySorter`)
 
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplReverseKeyArraySorter`
-
-Extends :
-
-* `SplArraySorter`
-
-### Method `sort`
-
-Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php)
-
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -94,21 +75,11 @@ Extends :
 
 ### Method `sort`
 
-Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
+Equivalent to:
+* [`sort`](http://php.net/manual/en/function.sort.php)
+* [`rsort`](http://php.net/manual/en/function.rsort.php) (in conjunction with a `SplReverseArraySorter`)
 
-* Parameter `$array`, of type `array`
-* Returns `array`
-
-## Class `SplReverseStandardArraySorter`
-
-Extends :
-
-* `SplArraySorter`
-
-### Method `sort`
-
-Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php)
-
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -120,12 +91,14 @@ Extends :
 
 ### Method `__construct`
 
+Prototype:
 * Parameter `$callback`, of type `callable`
 
 ### Method `sort`
 
 Equivalent to [`usort`](http://php.net/manual/en/function.usort.php)
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -137,12 +110,14 @@ Extends :
 
 ### Method `__construct`
 
+Prototype:
 * Parameter `$callback`, of type `callable`
 
 ### Method `sort`
 
 Equivalent to [`uasort`](http://php.net/manual/en/function.uasort.php)
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -154,12 +129,14 @@ Extends :
 
 ### Method `__construct`
 
+Prototype:
 * Parameter `$callback`, of type `callable`
 
 ### Method `sort`
 
 Equivalent to [`uksort`](http://php.net/manual/en/function.uksort.php)
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -173,6 +150,7 @@ Extends :
 
 Equivalent to [`shuffle`](http://php.net/manual/en/function.shuffle.php)
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -186,6 +164,7 @@ Extends :
 
 Equivalent to [`natcasesort`](http://php.net/manual/en/function.natcasesort.php)
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -199,6 +178,7 @@ Extends :
 
 Equivalent to [`natsort`](http://php.net/manual/en/function.natsort.php)
 
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`
 
@@ -212,23 +192,46 @@ Extends :
 
 Initantiates a multi-sorter, with in parameter every internal sorter
 
+Prototype:
 * Parameter `...$sorters`, of type `SplArraySorter` (variadic)
 
 ### Method `add`
 
 Adds multiple internal sorters in the multi-sorter
 
+Prototype:
 * Parameter `...$sorters`, of type `SplArraySorter` (variadic)
 
 ### Method `remove`
 
 Removes multiple internal sorters from the multi-sorter
 
+Prototype:
 * Parameter `...$sorters`, of type `SplArraySorter` (variadic)
 
 ### Method `sort`
 
 Equivalent to [`array_multisort`](http://php.net/manual/en/function.array-multisort.php)
 
+Prototype:
+* Parameter `$array`, of type `array`
+* Returns `array`
+
+## Class `SplReverseArraySorter`
+
+Extends :
+
+* `SplArraySorter`
+
+### Method `__construct`
+
+Initantiates a reverse sorter, with in parameter the internal sorter
+
+Prototype:
+* Parameter `$sorter`, of type `SplArraySorter`
+
+### Method `sort`
+
+Prototype:
 * Parameter `$array`, of type `array`
 * Returns `array`

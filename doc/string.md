@@ -4,6 +4,47 @@ This document describes the `string` scalar type's object-oriented base interfac
 
 ## Scalar class helper for `string`
 
+### Static method `toChar`
+
+Return a specific character
+
+Equivalent to [`chr`](http://php.net/manual/fr/function.chr.php)
+
+* Parameter `$ordinal`, of type `integer`
+* Returns `string`
+
+Example:
+
+```php
+<?php
+
+var_dump(SplString:toChar(97));
+```
+
+```
+string(1) "a"
+```
+
+### Static method `toOrdinal`
+
+Return a specific character
+
+Equivalent to [`ord`](http://php.net/manual/fr/function.ord.php)
+
+* Parameter `$char`, of type `string`
+* Returns `integer`
+
+Example:
+
+```php
+<?php
+
+var_dump(SplString::toOrdinal('a'));
+```
+
+```
+int(97)
+```
 
 ### Method `toLower`
 
