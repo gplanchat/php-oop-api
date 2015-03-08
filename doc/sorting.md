@@ -24,10 +24,10 @@ class UserlandQuickSortAlgorithmSorter
     ) {
         $iterator = clone $first;
         if ($iterator < $last) {
-            $pivot = $iterator->seek(ceil($first->distance($last) / 2), SEEK_CUR);
-            $pivot = $this->partition($collection, $first, $last, $pivot);
-            
-            $this->quickSort($collection, $first, (clone $pivot)->previous());
+            $pivot = clone $last;
+            $wall = $this->partition($collection, $first, $last);
+
+            $this->quickSort($collection, $wall, (clone $pivot)->previous());
             $this->quickSort($collection, (clone $pivot)->next(), $last);
         }
     }
@@ -41,24 +41,20 @@ class UserlandQuickSortAlgorithmSorter
 
     private function partition(
         Sortable $collection,
-        BidirectionalSeekableIterator $first,
-        BidirectionalSeekableIterator $last,
+        BidirectionalSeekableIterator $wall,
         BidirectionalSeekableIterator $pivot
     ) {
-        $collection->swap($last, $pivot);
-
-        $tmp = clone $first;
         $iterator = $collection->getIterator();
-        while ($iterator < $end) {
-            if ($this->compare($iterator, $last)) {
-                $collection->swap($iterator, $tmp);
-                $tmp->next();
+        while ($iterator < $pivot) {
+            if ($this->compare($iterator, $pivot)) {
+                $collection->swap($iterator, $wall);
+                $wall->next();
             }
             $iterator->next();
         }
-        $collection->swap($last, $tmp);
+        $collection->swap($wall, $pivot);
 
-        return $tmp;
+        return $wall;
     }
 }
 ```
