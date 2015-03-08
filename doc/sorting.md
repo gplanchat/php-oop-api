@@ -47,7 +47,7 @@ class UserlandQuickSortAlgorithmSorter
     ) {
         $collection->swap($last, $pivot);
 
-        $tmp = $first;
+        $tmp = clone $first;
         $iterator = $collection->getIterator();
         while ($iterator < $end) {
             if ($this->compare($iterator, $last)) {
