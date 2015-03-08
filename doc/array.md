@@ -10,9 +10,9 @@ The fact that this class implements both `IteratorAggregate` (via `SortableColle
 is made on purpose. The `BidirectionalSeekableIterator` part represents the internal pointer, whence the `IteratorAggregate`
 would be equivalent to a `new ArrayIterator($array)`.
 
-By the way, this interface would make useless these classes ans interfaces:
-* `ArrayIterator`
-* `ArrayObject`
+By the way, this interface would make useless the classe `ArrayObject`.
+
+It also brings the need to change the `ArrayIterator` class and transform it to implement the `BidirectionalSeekableIterator` interface.
 
 Example :
 
