@@ -40,8 +40,9 @@ Extends :
 
 ### Method `asort`
 
-Equivalent to [`asort`](http://php.net/manual/en/function.asort.php)
-Equivalent to [`arsort`](http://php.net/manual/en/function.arsort.php) (in conjunction with a `SplReverseArraySorter`)
+Equivalent to:
+* [`asort`](http://php.net/manual/en/function.asort.php)
+* [`arsort`](http://php.net/manual/en/function.arsort.php) (in conjunction with a `SplReverseArraySorter`)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
@@ -56,8 +57,9 @@ Extends :
 
 Equivalent to `ksort`
 
-Equivalent to [`ksort`](http://php.net/manual/en/function.ksort.php)
-Equivalent to [`krsort`](http://php.net/manual/en/function.krsort.php) (in conjunction with a `SplReverseArraySorter`)
+Equivalent to:
+* [`ksort`](http://php.net/manual/en/function.ksort.php)
+* [`krsort`](http://php.net/manual/en/function.krsort.php) (in conjunction with a `SplReverseArraySorter`)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
@@ -70,8 +72,9 @@ Extends :
 
 ### Method `sort`
 
-Equivalent to [`sort`](http://php.net/manual/en/function.sort.php)
-Equivalent to [`rsort`](http://php.net/manual/en/function.rsort.php) (in conjunction with a `SplReverseArraySorter`)
+Equivalent to:
+* [`sort`](http://php.net/manual/en/function.sort.php)
+* [`rsort`](http://php.net/manual/en/function.rsort.php) (in conjunction with a `SplReverseArraySorter`)
 
 * Parameter `$array`, of type `array`
 * Returns `array`
