@@ -17,8 +17,11 @@ class UserlandQuickSortAlgorithmSorter
         $this->quickSort($collection, $collection->first(), $collection->last());
     }
 
-    private function quickSort(SortableCollection $collection, Iterator $first, Iterator $last)
-    {
+    private function quickSort(
+        SortableCollection $collection,
+        BidirectionalSeekableIterator $first,
+        BidirectionalSeekableIterator $last
+    ) {
         $iterator = clone $first;
         if ($iterator < $last) {
             $pivot = $iterator->seek($first->distance($last) / 2, SEEK_CUR);
@@ -29,13 +32,19 @@ class UserlandQuickSortAlgorithmSorter
         }
     }
 
-    private function compare(Iterator $left, Iterator $right)
-    {
+    private function compare(
+        BidirectionalSeekableIterator $left,
+        BidirectionalSeekableIterator $right
+    ) {
         return (bool) $left->current() <= $right->current();
     }
 
-    private function partition(Sortable $collection, Iterator $first, Iterator $last, Iterator $pivot)
-    {
+    private function partition(
+        Sortable $collection,
+        BidirectionalSeekableIterator $first,
+        BidirectionalSeekableIterator $last,
+        BidirectionalSeekableIterator $pivot
+    ) {
         $collection->swap($last, $pivot);
 
         $tmp = $first;
