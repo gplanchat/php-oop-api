@@ -24,7 +24,7 @@ class UserlandQuickSortAlgorithmSorter
     ) {
         $iterator = clone $first;
         if ($iterator < $last) {
-            $pivot = $iterator->seek($first->distance($last) / 2, SEEK_CUR);
+            $pivot = $iterator->seek(ceil($first->distance($last) / 2), SEEK_CUR);
             $pivot = $this->partition($collection, $first, $last, $pivot);
             
             $this->quickSort($collection, $first, (clone $pivot)->previous());
