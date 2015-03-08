@@ -54,6 +54,7 @@ class UserlandQuickSortAlgorithmSorter
                 $collection->swap($iterator, $tmp);
                 $tmp->next();
             }
+            $iterator->next();
         }
         $collection->swap($last, $tmp);
 
