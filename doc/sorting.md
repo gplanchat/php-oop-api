@@ -2,7 +2,7 @@
 
 This document decribes a way to make uniform collections/array sorting in an OO-style.
 
-It also suggests some upgrades to the `SeekableIterator` (with BC break) to handle more easily and effectively sortings.
+It also suggests some new iterator `BidirectionalSeekableIterator` to handle more easily and effectively sortings.
 
 A quicksort (actually very uneffective) could be implemented this way :
 
@@ -53,9 +53,9 @@ class UserlandQuickSortAlgorithmSorter
 }
 ```
 
-## Interface `SeekableIterator`
+## Interface `BidirectionalSeekableIterator`
 
-This interface already exists, but needs some improvements to make possible and easy collection sorting.
+Extends `SeekableIterator` 
 
 ### Constants
 
@@ -67,7 +67,7 @@ This interface already exists, but needs some improvements to make possible and 
 
 Used to determine the distance between 2 iterators. The iterators *MUST* by the way iterate on the same collection.
 
-* Parameter `$friend`, of type `SeekableIterator`
+* Parameter `$friend`, of type `BidirectionalSeekableIterator`
 * Returns `integer`
 
 ### Method `seek`
@@ -75,20 +75,20 @@ Used to determine the distance between 2 iterators. The iterators *MUST* by the 
 Used to determine seek the iterator, this method already exists, but the prototypes changes
 
 * Parameter `$position`, of type `integer`
-* Parameter `$whence`, of type `integer`, between `SEEK_SET`, `SEEK_CUR` or `SEEK_END`
-* Returns nothing
+* Parameter `$whence`, of type `integer`, between `BidirectionalSeekableIterator::SEEK_SET`, `BidirectionalSeekableIterator::SEEK_CUR` or `BidirectionalSeekableIterator::SEEK_END`
+* Returns `void`
 
 ### Method `previous`
 
 Seeks the iterator one position behind 
 
-* Returns nothing
+* Returns `void`
 
 ### Method `next`
 
 Seeks the iterator one position ahead 
 
-* Returns nothing
+* Returns `void`
 
 ## Interface `Sortable`
 
@@ -108,31 +108,39 @@ This interface defines no method and cannot be directly implemented in user-spac
 
 ### Method `swap`
 
-* Parameter `$leftKey` of type `SeekableIterator`
-* Parameter `$rightKey` of type `SeekableIterator`
-* Returns nothing
+Swaps two values between them in the collection
+
+* Parameter `$leftKey` of type `BidirectionalSeekableIterator`
+* Parameter `$rightKey` of type `BidirectionalSeekableIterator`
+* Returns `void`
 
 ### Method `first`
 
+Returns a new `BidirectionalSeekableIterator`, initialized at the beginning of the collection
+
 * Takes no parameter
-* Returns `SeekableIterator`, positioned to the first element
+* Returns `BidirectionalSeekableIterator`, positioned to the first element
 
 ### Method `last`
 
+Returns a new `BidirectionalSeekableIterator`, initialized at the end of the collection
+
 * Takes no parameter
-* Returns `SeekableIterator`, positioned to the last element
+* Returns `BidirectionalSeekableIterator`, positioned to the last element
 
 ### Method `getIterator`
 
+Returns a new `BidirectionalSeekableIterator`
+
 * Takes no parameter
-* Returns `SeekableIterator`, positioned to the first element
+* Returns `BidirectionalSeekableIterator`, positioned to the first element
 
 ## Class `CollectionSorter`
 
 ### Method `sort`
 
 * Parameter `$collection` of type `SortableCollection`
-* Returns nothing
+* Returns `SortableCollection`
 
 ## Class `SortableAggregate`
 
@@ -141,11 +149,11 @@ This interface defines no method and cannot be directly implemented in user-spac
 ### Method `sort`
 
 * Parameter `$sorter` of type `Sorter`
-* Returns nothing
+* Returns `void`
 
 ## Class `SorterAggregate`
 
 ### Method `sort`
 
 * Parameter `$collection` of type `SortableAggregate`
-* Returns nothing
+* Returns `SortableCollection`

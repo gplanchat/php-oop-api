@@ -6,6 +6,14 @@ This **IS NOT** a reimplementation of the array type into objects.
 
 It **IS** a thin layer above the current array API, availiable in the userspace and inter-operable with the current API.
 
+The fact that this class implements both `IteratorAggregate` (via `SortableCollection`) and `BidirectionalSeekableIterator`
+is made on purpose. The `BidirectionalSeekableIterator` part represents the internal pointer, whence the `IteratorAggregate`
+would be equivalent to a `new ArrayIterator($array)`.
+
+By the way, this interface would make useless these classes ans interfaces:
+* `ArrayIterator`
+* `ArrayObject`
+
 Example :
 
 ```php
@@ -33,8 +41,8 @@ array(9) {
 ## Scalar class helper for `array`
 
 Implements :
-* `IteratorAggregate`
-* `Countable`
+* `SortableCollection`
+* `BidirectionalSeekableIterator`
 * `Serializable`
 * `JsonSerializable`
 * `ArrayAccess`
@@ -1084,7 +1092,53 @@ Implements [`ArrayIterator::key`](http://php.net/manual/en/arrayiterator.key.php
 
 * Returns `mixed`
 
-### Method `next`
+### Method `swap`
+
+Swaps two values between them in the array (see [Sorting API](sorting.md))
+
+* Parameter `$leftKey` of type `BidirectionalSeekableIterator`
+* Parameter `$rightKey` of type `BidirectionalSeekableIterator`
+* Returns `void`
+
+### Method `first`
+
+Returns a new `BidirectionalSeekableIterator`, initialized at the beginning of the array (see [Sorting API](sorting.md))
+
+* Takes no parameter
+* Returns `BidirectionalSeekableIterator`, positioned to the first element
+
+### Method `last`
+
+Returns a new `BidirectionalSeekableIterator`, initialized at the end of the array (see [Sorting API](sorting.md))
+
+* Takes no parameter
+* Returns `BidirectionalSeekableIterator`, positioned to the last element
+
+### Method `getIterator`
+
+Returns a new `BidirectionalSeekableIterator` (see [Sorting API](sorting.md))
+
+* Takes no parameter
+* Returns `BidirectionalSeekableIterator`, positioned to the first element
+
+### Method `distance`
+
+Used to determine the distance between 2 iterators. The iterators *MUST* by the way iterate on the same collection.
+
+* Parameter `$friend`, of type `BidirectionalSeekableIterator`
+* Returns `integer`
+
+### Method `seek`
+
+Seek the internal pointer to position (see [Sorting API](sorting.md))
+
+Implements [`ArrayIterator::seek`](http://php.net/manual/en/arrayiterator.seek.php)
+
+* Parameter `$position`, of type `integer`
+* Parameter `$whence`, of type `integer`, between `BidirectionalSeekableIterator::SEEK_SET`, `BidirectionalSeekableIterator::SEEK_CUR` or `BidirectionalSeekableIterator::SEEK_END`
+* Returns `void`
+
+### Method `next` (see [Sorting API](sorting.md))
 
 Advance the internal array pointer of an array
 
@@ -1094,7 +1148,7 @@ Implements [`ArrayIterator::next`](http://php.net/manual/en/arrayiterator.next.p
 
 * Returns `void`
 
-### Method `prev`
+### Method `previous` (see [Sorting API](sorting.md))
 
 Move back the internal array pointer of an array
 
@@ -1104,21 +1158,12 @@ Reverse method of [`next`](http://php.net/manual/en/function.next.php)
 
 ### Method `rewind`
 
-Set the internal pointer of an array to its first element
+Set the internal pointer of an array to its first element (see [Sorting API](sorting.md))
 
 Equivalent [`reset`](http://php.net/manual/en/function.reset.php)
 
 Implements [`ArrayIterator::reset`](http://php.net/manual/en/arrayiterator.reset.php)
 
-* Returns `void`
-
-### Method `seek`
-
-Seek to position
-
-Implements [`ArrayIterator::seek`](http://php.net/manual/en/arrayiterator.seek.php)
-
-* Parameter `$position`, of type `integer`
 * Returns `void`
 
 ### Method `valid`
@@ -1131,7 +1176,7 @@ Implements [`ArrayIterator::reset`](http://php.net/manual/en/arrayiterator.valid
 
 ### Method `end`
 
-Set the internal pointer of an array to its last element
+Set the internal pointer of an array to its last element (see [Sorting API](sorting.md))
 
 Equivalent to [`end`](http://php.net/manual/en/function.end.php)
 

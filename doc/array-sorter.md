@@ -27,6 +27,10 @@ array(5) {
 
 ## Abstract class `SplArraySorter`
 
+Implements:
+
+* `CollectionSorter` (see [Sorting API](sorting.md))
+
 ### Abstract method `sort`
 
 Prototype:
@@ -35,7 +39,7 @@ Prototype:
 
 ## Class `SplAlphaArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -51,7 +55,7 @@ Prototype:
 
 ## Class `SplKeyArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -69,7 +73,7 @@ Prototype:
 
 ## Class `SplStandardArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -85,7 +89,7 @@ Prototype:
 
 ## Class `SplCustomArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -104,7 +108,7 @@ Prototype:
 
 ## Class `SplCustomAssociativeArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -123,7 +127,7 @@ Prototype:
 
 ## Class `SplCustomKeyArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -142,7 +146,7 @@ Prototype:
 
 ## Class `SplShuffleArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -156,7 +160,7 @@ Prototype:
 
 ## Class `SplNaturalCaseSensitiveArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -170,7 +174,7 @@ Prototype:
 
 ## Class `SplNaturalArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -184,7 +188,7 @@ Prototype:
 
 ## Class `SplChainingArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
@@ -219,7 +223,7 @@ Prototype:
 
 ## Class `SplReverseArraySorter`
 
-Extends :
+Extends:
 
 * `SplArraySorter`
 
