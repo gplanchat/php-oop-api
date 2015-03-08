@@ -22,13 +22,15 @@ class UserlandQuickSortAlgorithmSorter
         BidirectionalSeekableIterator $first,
         BidirectionalSeekableIterator $last
     ) {
-        $iterator = clone $first;
-        if ($iterator < $last) {
+        $iterator = $collection->getIterator();
+        while ($iterator < $last) {
             $pivot = clone $last;
             $wall = $this->partition($collection, $first, $last);
 
             $this->quickSort($collection, $wall, (clone $pivot)->previous());
             $this->quickSort($collection, (clone $pivot)->next(), $last);
+
+            $iterator->next();
         }
     }
 
@@ -44,7 +46,7 @@ class UserlandQuickSortAlgorithmSorter
         BidirectionalSeekableIterator $wall,
         BidirectionalSeekableIterator $pivot
     ) {
-        $iterator = $collection->getIterator();
+        $iterator = clone $wall;
         while ($iterator < $pivot) {
             if ($this->compare($iterator, $pivot)) {
                 $collection->swap($iterator, $wall);
