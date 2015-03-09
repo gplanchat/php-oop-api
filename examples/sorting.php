@@ -1,95 +1,9 @@
 <?php
 
-interface Sortable {}
-
-interface CollectionSorter
-{
-    /**
-     * @param SortableCollection $collection
-     * @return SortableCollection
-     */
-    public function sort(SortableCollection $collection);
-
-    /**
-     * @param BidirectionalSeekableIterator $left
-     * @param BidirectionalSeekableIterator $right
-     * @return bool
-     */
-    public function compare(
-        BidirectionalSeekableIterator $left,
-        BidirectionalSeekableIterator $right
-    );
-}
-
-interface SortableCollection
-    extends IteratorAggregate, Sortable, Countable
-{
-    /**
-     * @param BidirectionalSeekableIterator $leftKey
-     * @param BidirectionalSeekableIterator $rightKey
-     * @return void
-     */
-    public function swap(BidirectionalSeekableIterator $leftKey, BidirectionalSeekableIterator $rightKey);
-
-    /**
-     * @return BidirectionalSeekableIterator
-     */
-    public function first();
-
-    /**
-     * @return BidirectionalSeekableIterator
-     */
-    public function last();
-
-    /**
-     * @return BidirectionalSeekableIterator
-     */
-    public function getIterator();
-
-    /**
-     * @return array
-     */
-    public function keys();
-}
-
-/**
- * Note: extends Iterator instead of SeekableIterator due to E_STRICT thrown when a 2nd parameter is added to seek()
- */
-interface BidirectionalSeekableIterator
-    extends /* SeekableIterator*/ Iterator
-{
-    const SEEK_SET = 0;
-    const SEEK_CUR = 1;
-    const SEEK_END = 2;
-
-    /**
-     * @param BidirectionalSeekableIterator $friend
-     * @return int
-     */
-    public function distance(BidirectionalSeekableIterator $friend);
-
-    /**
-     * @param int $position
-     * @param int $whence
-     * @return void
-     */
-    public function seek($position, $whence);
-
-    /**
-     * @return void
-     */
-    public function previous();
-
-    /**
-     * @return void
-     */
-    public function next();
-
-    /**
-     * @return integer
-     */
-    public function index();
-}
+require __DIR__ . '../classes/Sortable.php';
+require __DIR__ . '../classes/BidirectionalSeekableIterator.php';
+require __DIR__ . '../classes/CollectionSorter.php';
+require __DIR__ . '../classes/SortableCollection.php';
 
 class FooIterator
     implements BidirectionalSeekableIterator
