@@ -9,6 +9,16 @@ interface CollectionSorter
      * @return SortableCollection
      */
     public function sort(SortableCollection $collection);
+
+    /**
+     * @param BidirectionalSeekableIterator $left
+     * @param BidirectionalSeekableIterator $right
+     * @return bool
+     */
+    public function compare(
+        BidirectionalSeekableIterator $left,
+        BidirectionalSeekableIterator $right
+    );
 }
 
 interface SortableCollection
@@ -297,7 +307,7 @@ class Foo
     }
 }
 
-class UserlandQuickSortAlgorithmSorter
+abstract class UserlandSorter
     implements CollectionSorter
 {
     public function sort(SortableCollection $collection)
@@ -331,13 +341,6 @@ class UserlandQuickSortAlgorithmSorter
         }
     }
 
-    private function compare(
-        BidirectionalSeekableIterator $left,
-        BidirectionalSeekableIterator $right
-    ) {
-        return (bool) ($left->current() < $right->current());
-    }
-
     private function partition(
         SortableCollection $collection,
         BidirectionalSeekableIterator $first,
@@ -360,6 +363,48 @@ class UserlandQuickSortAlgorithmSorter
         $collection->swap($wall, $last);
 
         return $wall;
+    }
+}
+
+class UserlandQuickSortAlgorithmSorter
+    extends UserlandSorter
+{
+    /**
+     * @param BidirectionalSeekableIterator $left
+     * @param BidirectionalSeekableIterator $right
+     * @return bool
+     */
+    public function compare(
+        BidirectionalSeekableIterator $left,
+        BidirectionalSeekableIterator $right
+    ) {
+        return (bool) ($left->current() < $right->current());
+    }
+}
+
+class ReverseSorter
+    extends UserlandSorter
+{
+    /**
+     * @var CollectionSorter
+     */
+    private $internal;
+
+    public function __construct(CollectionSorter $internal)
+    {
+        $this->internal = $internal;
+    }
+
+    /**
+     * @param BidirectionalSeekableIterator $left
+     * @param BidirectionalSeekableIterator $right
+     * @return bool
+     */
+    public function compare(
+        BidirectionalSeekableIterator $left,
+        BidirectionalSeekableIterator $right
+    ) {
+        return !$this->internal->compare($left, $right);
     }
 }
 
