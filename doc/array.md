@@ -54,8 +54,8 @@ Creates an array by using one array for keys and another for its values
 
 Equivalent to [`array_combine`](http://php.net/manual/en/function.array-combine.php)
 
-* Parameter `$columnKey`, of type `Traversable`
-* Parameter `$indexKey`, of type `Traversable`
+* Parameter `$keys`, of type `Traversable`
+* Parameter `$values`, of type `Traversable`
 * Returns `array`
 
 Example :
@@ -205,7 +205,7 @@ Changes the case of all keys in an array
 
 Equivalent to [`array_change_key_case`](http://php.net/manual/en/function.array-change-key-case.php)
 
-* Parameter `$size`, of type `integer`, defaults to `SplArray::CASE_LOWER`, possible values :
+* Parameter `$case`, of type `integer`, defaults to `SplArray::CASE_LOWER`, possible values :
   * SplArray::CASE_LOWER
   * SplArray::CASE_UPPER
 * Returns `array`
@@ -281,7 +281,7 @@ Return the values from a single column in the input array
 Equivalent to [`array_column`](http://php.net/manual/en/function.array-column.php)
 
 * Parameter `$columnKey`, of type `mixed`
-* Parameter `$indexKey`, of type `mixed`
+* Parameter `$indexKey`, of type `mixed`, defaults to `null`
 * Returns `array`
 
 Example :
@@ -416,6 +416,8 @@ Pad array to the specified length with a value
 
 Equivalent to [`array_pad`](http://php.net/manual/en/function.array-pad.php)
 
+* Parameter `$size`, of type `integer`
+* Parameter `$value`, of type `mixed`
 * Returns `array`
 
 Example :
@@ -479,7 +481,7 @@ Removes duplicate values from an array
 
 Equivalent to [`array_unique`](http://php.net/manual/en/function.array-unique.php)
 
-* Parameter `$sortFlags`, of type `integer`, defaults to `SplArray::SORT_STRING`
+* Parameter `$sortFlags`, of type `integer`, defaults to `Sortable::SORT_STRING`
 * Returns `array`
 
 Example :
@@ -558,6 +560,34 @@ var_dump($result);
 
 ```
 bool(true)
+```
+
+### Method `search`
+
+Searches the array for a given value and returns the corresponding key if successful
+
+Equivalent to [`array_search`](http://php.net/manual/en/function.array-search.php)
+
+* Parameter `$needle`, of type `mixed`
+* Parameter `$strict`, of type `boolean`, defaults to `false`
+* Returns `mixed`
+
+Example :
+
+```php
+<?php
+
+$myArray = [
+    'one' => 'apple',
+    'two' => 'melon',
+    'three' => 'banana'
+];
+$result = $myArray->search('melon');
+var_dump($result);
+```
+
+```
+string(3) "two"
 ```
 
 ### Method `keys`
@@ -799,7 +829,7 @@ Replaces elements from passed arrays into the first array
 
 Equivalent to [`array_replace`](http://php.net/manual/en/function.array-replace.php)
 
-* Parameter `...$replacing`, of type `array` (variadic)
+* Parameter `...$replacement`, of type `array` (variadic)
 * Returns `array`
 
 Example :
@@ -883,34 +913,6 @@ array(2) {
         'seven' => 'pear'
     }
 }
-```
-
-### Method `search`
-
-Searches the array for a given value and returns the corresponding key if successful
-
-Equivalent to [`array_search`](http://php.net/manual/en/function.array-search.php)
-
-* Parameter `$needle`, of type `mixed`
-* Parameter `$strict`, of type `boolean`, defaults to `false`
-* Returns `mixed`
-
-Example :
-
-```php
-<?php
-
-$myArray = [
-    'one' => 'apple',
-    'two' => 'melon',
-    'three' => 'banana'
-];
-$result = $myArray->search('melon');
-var_dump($result);
-```
-
-```
-string(3) "two"
 ```
 
 ### Method `reduce`

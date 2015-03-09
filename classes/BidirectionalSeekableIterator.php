@@ -22,7 +22,7 @@ interface BidirectionalSeekableIterator
      * @param int $whence
      * @return void
      */
-    public function seek($position, $whence);
+    public function seek($position, $whence = BidirectionalSeekableIterator::SEEK_SET);
 
     /**
      * @return void
