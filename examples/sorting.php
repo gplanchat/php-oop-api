@@ -437,6 +437,7 @@ $collections[] = new Foo(3, 6, 2, 5, 1, 7, 4);
 $collections[] = new Foo(4, 3, 2, 7, 1, 5, 6);
 
 $sorter = new UserlandQuickSortAlgorithmSorter();
+$reverseSorter = new ReverseSorter($sorter);
 
 $i = 0;
 foreach ($collections as $collection) {
@@ -453,9 +454,18 @@ foreach ($collections as $collection) {
     $sorter->sort($collection);
     $end = microtime(true);
 
-    printf('(%fus / %fus) [%s]' . PHP_EOL, ($nativeEnd - $nativeStart) * 1000000, ($end - $start) * 1000000, implode(', ', $original));
+    printf('Standard: (%fus / %fus) [%s]' . PHP_EOL, ($nativeEnd - $nativeStart) * 1000000, ($end - $start) * 1000000, implode(', ', $original));
 
     assert($collection->internal === [1, 2, 3, 4, 5, 6, 7],
+        sprintf('Test %d failed, [%s] => [%s].', $i, implode(', ', $original), implode(', ', $collection->internal)));
+
+    $start = microtime(true);
+    $reverseSorter->sort($collection);
+    $end = microtime(true);
+
+    printf('Reverse:  (%fus / %fus) [%s]' . PHP_EOL, ($nativeEnd - $nativeStart) * 1000000, ($end - $start) * 1000000, implode(', ', $original));
+
+    assert($collection->internal === [7, 6, 5, 4, 3, 2, 1],
         sprintf('Test %d failed, [%s] => [%s].', $i, implode(', ', $original), implode(', ', $collection->internal)));
 }
 
