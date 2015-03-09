@@ -47,7 +47,7 @@ class SplArray
     {}
 
     /**
-     * @param integer $startIndex
+     * @param array $keys
      * @param mixed $value
      * @return array
      */
