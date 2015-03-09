@@ -22,13 +22,24 @@ class UserlandQuickSortAlgorithmSorter
         BidirectionalSeekableIterator $first,
         BidirectionalSeekableIterator $last
     ) {
-        $iterator = clone $first;
-        if ($iterator < $last) {
-            $pivot = $iterator->seek($first->distance($last) / 2, SEEK_CUR);
-            $pivot = $this->partition($collection, $first, $last, $pivot);
-            
-            $this->quickSort($collection, $first, (clone $pivot)->previous());
-            $this->quickSort($collection, (clone $pivot)->next(), $last);
+        if ($first->distance($last) > 0) {
+            $pivot = $this->partition($collection, $first, $last);
+
+            $tmp = clone $pivot;
+            if ($first->distance($tmp) > 1) {
+                $tmp->previous();
+                $this->quickSort($collection, $first, $tmp);
+            } else if ($this->compare($pivot, $first)) {
+                $collection->swap($pivot, $first);
+            }
+
+            $tmp = clone $pivot;
+            if ($tmp->distance($last) > 1) {
+                $tmp->next();
+                $this->quickSort($collection, $tmp, $last);
+            } else if (!$this->compare($pivot, $last)) {
+                $collection->swap($last, $pivot);
+            }
         }
     }
 
@@ -36,31 +47,36 @@ class UserlandQuickSortAlgorithmSorter
         BidirectionalSeekableIterator $left,
         BidirectionalSeekableIterator $right
     ) {
-        return (bool) $left->current() <= $right->current();
+        return (bool) ($left->current() < $right->current());
     }
 
     private function partition(
-        Sortable $collection,
+        SortableCollection $collection,
         BidirectionalSeekableIterator $first,
-        BidirectionalSeekableIterator $last,
-        BidirectionalSeekableIterator $pivot
+        BidirectionalSeekableIterator $last
     ) {
-        $collection->swap($last, $pivot);
+        $pivot = clone $first;
+        $pivot->seek2(ceil($first->distance($last) / 2), BidirectionalSeekableIterator::SEEK_CUR);
 
-        $tmp = clone $first;
-        $iterator = $collection->getIterator();
-        while ($iterator < $end) {
+        $collection->swap($pivot, $last);
+
+        $wall = clone $first;
+        $iterator = clone $first;
+        while ($iterator->distance($last) >= 1) {
             if ($this->compare($iterator, $last)) {
-                $collection->swap($iterator, $tmp);
-                $tmp->next();
+                $collection->swap($wall, $iterator);
+                $wall->next();
             }
+            $iterator->next();
         }
-        $collection->swap($last, $tmp);
+        $collection->swap($wall, $last);
 
-        return $tmp;
+        return $wall;
     }
 }
 ```
+
+For full example, see [sorting example](../examples/sorting.php)
 
 ## Interface `BidirectionalSeekableIterator`
 
