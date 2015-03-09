@@ -8,14 +8,35 @@ require __DIR__ . '/../classes/SortableCollection.php';
 class FooIterator
     implements BidirectionalSeekableIterator
 {
+    /**
+     * @var SortableCollection
+     */
     private $internalCollection;
 
+    /**
+     * @var int
+     */
     private $currentIndex;
 
+    /**
+     * @var mixed[]
+     */
+    private $internalCollectionKeys;
+
+    /**
+     * @var int
+     */
+    private $lastItem;
+
+    /**
+     * @param SortableCollection $collection
+     */
     public function __construct(SortableCollection $collection)
     {
         $this->internalCollection = $collection;
         $this->currentIndex = 0;
+        $this->internalCollectionKeys = $collection->keys();
+        $this->lastItem = count($collection) - 1;
     }
 
     /**
@@ -39,8 +60,7 @@ class FooIterator
      */
     public function key()
     {
-        $keys = $this->internalCollection->keys();
-        return $keys[$this->index()];
+        return $this->internalCollectionKeys[$this->index()];
     }
 
     /**
@@ -60,19 +80,20 @@ class FooIterator
     }
 
     /**
-     * @param int $position
-     * @param int $whence
      * @return void
      */
-    public function seek($position, $whence = self::SEEK_SET)
+    public function end()
     {
-        $limit = count($this->internalCollection) - 1;
-        if ($whence === self::SEEK_CUR) {
-            $position += $this->currentIndex;
-        } else if ($whence === self::SEEK_END) {
-            $position = count($this->internalCollection) - $position - 1;
-        }
-        if ($position > $limit || $position < 0) {
+        $this->currentIndex = $this->lastItem;
+    }
+
+    /**
+     * @param int $position
+     * @return void
+     */
+    public function seek($position)
+    {
+        if ($position > $this->lastItem || $position < 0) {
             throw new OutOfRangeException();
         }
         $this->currentIndex = $position;
@@ -88,19 +109,21 @@ class FooIterator
     }
 
     /**
+     * @param int $position
      * @return void
      */
-    public function previous()
+    public function previous($position = 1)
     {
-        $this->seek(-1, self::SEEK_CUR);
+        $this->seek($this->currentIndex - $position);
     }
 
     /**
+     * @param int $position
      * @return void
      */
-    public function next()
+    public function next($position = 1)
     {
-        $this->seek(1, self::SEEK_CUR);
+        $this->seek($this->currentIndex + $position);
     }
 }
 
@@ -150,7 +173,7 @@ class Foo
     public function first()
     {
         $iterator = $this->getIterator();
-        $iterator->seek(0, BidirectionalSeekableIterator::SEEK_SET);
+        $iterator->rewind();
         return $iterator;
     }
 
@@ -160,7 +183,7 @@ class Foo
     public function last()
     {
         $iterator = $this->getIterator();
-        $iterator->seek(0, BidirectionalSeekableIterator::SEEK_END);
+        $iterator->end();
         return $iterator;
     }
 
@@ -266,7 +289,7 @@ abstract class UserlandSorter
         BidirectionalSeekableIterator $last
     ) {
         $pivot = clone $first;
-        $pivot->seek(ceil($first->distance($last) / 2), BidirectionalSeekableIterator::SEEK_CUR);
+        $pivot->next(ceil($first->distance($last) / 2));
 
         $collection->swap($pivot, $last);
 

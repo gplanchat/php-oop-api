@@ -5,7 +5,7 @@
  * thrown when a 2nd parameter is added to seek()
  */
 interface BidirectionalSeekableIterator
-    extends /* SeekableIterator*/ Iterator
+    extends SeekableIterator
 {
     const SEEK_SET = 0;
     const SEEK_CUR = 1;
@@ -18,24 +18,24 @@ interface BidirectionalSeekableIterator
     public function distance(BidirectionalSeekableIterator $friend);
 
     /**
-     * @param int $position
-     * @param int $whence
+     * @param int $offset
      * @return void
      */
-    public function seek($position, $whence = BidirectionalSeekableIterator::SEEK_SET);
+    public function previous($offset = 1);
 
     /**
+     * @param int $offset
      * @return void
      */
-    public function previous();
-
-    /**
-     * @return void
-     */
-    public function next();
+    public function next($offset = 1);
 
     /**
      * @return integer
      */
     public function index();
+
+    /**
+     * @return void
+     */
+    public function end();
 }
