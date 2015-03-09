@@ -1,7 +1,8 @@
 # PHP 7+ Object-oriented API - Sorting collection data structures
 
-This document decribes a way to make uniform collections/array sorting in an OO-style.
+## Abstract
 
+This document describes a way to make uniform collections/array sorting in an OO-style.
 It also suggests some new iterator `BidirectionalSeekableIterator` to handle more easily and effectively sortings.
 
 A quicksort (actually very uneffective here) could be implemented this way :
@@ -78,6 +79,8 @@ class UserlandQuickSortAlgorithmSorter
 
 For full example, see [sorting example](../examples/sorting.php)
 
+## 
+
 ## Interface `BidirectionalSeekableIterator`
 
 See [BidirectionalSeekableIterator.php](../classes/BidirectionalSeekableIterator.php)
@@ -102,7 +105,10 @@ Used to determine the distance between 2 iterators. The iterators *MUST* by the 
 Used to determine seek the iterator, this method already exists, but the prototypes changes
 
 * Parameter `$position`, of type `integer`
-* Parameter `$whence`, of type `integer`, between `BidirectionalSeekableIterator::SEEK_SET`, `BidirectionalSeekableIterator::SEEK_CUR` or `BidirectionalSeekableIterator::SEEK_END`
+* Parameter `$whence`, of type `integer`, between:
+  * `BidirectionalSeekableIterator::SEEK_SET`
+  * `BidirectionalSeekableIterator::SEEK_CUR`
+  * `BidirectionalSeekableIterator::SEEK_END`
 * Returns `void`
 
 ### Method `previous`
@@ -122,17 +128,23 @@ Seeks the iterator one position ahead
 See [BidirectionalSeekableIterator.php](../classes/Sortable.php)
 
 This interface defines no method and cannot be directly implemented in user-space.
+It is used internally to mark objects as sortable.
 
 * Extends `Traversable`
 * Extends `Countable`
 
-## Class `Sorter`
+## Interface `Sorter`
 
 This interface defines no method and cannot be directly implemented in user-space.
+It is used internally to mark objects as sorters algorithms.
 
-## Class `SortableCollection`
+## Interface `SortableCollection`
 
 See [BidirectionalSeekableIterator.php](../classes/SortableCollection.php)
+
+This interface defines how collections that are sortable should behave.
+Sorting algorithms then has some ways to change de items orders by swapping
+them and some ways to simply get seekable and bi-directional iterators.
 
 * Extends `Sortable`
 * Extends `IteratorAggregate`
@@ -166,27 +178,41 @@ Returns a new `BidirectionalSeekableIterator`
 * Takes no parameter
 * Returns `BidirectionalSeekableIterator`, positioned to the first element
 
-## Class `CollectionSorter`
+## Interface `CollectionSorter`
 
 See [BidirectionalSeekableIterator.php](../classes/CollectionSorter.php)
 
+This interface defines the base interface a collection sorter should have.
+It actually exposes a `sort` method, the worker method and also a `compare`
+method, used to compare two positions between them in the collection.
+
 ### Method `sort`
+
+This method implements the sorting algorithm.
 
 * Parameter `$collection` of type `SortableCollection`
 * Returns `SortableCollection`
 
-## Class `SortableAggregate`
+### Method `compare`
+
+This method is used to compare two positions in the collection, and returns a boolean :
+* `true` when the two items should be swapped
+* `false` when no action should be done
+
+* Parameter `$left` of type `BidirectionalSeekableIterator`
+* Parameter `$right` of type `BidirectionalSeekableIterator`
+* Returns `boolean`
+
+## Interface `SortableAggregate`
 
 * Extends `Sortable`
+
+This interface is used by objects containing a collection and which should need to make
+its internal collection sortable, depending on external conditions.
+
+This is intended to avoid the need to use decorator patterns for objects encapsulating a collection.
 
 ### Method `sort`
 
 * Parameter `$sorter` of type `Sorter`
 * Returns `void`
-
-## Class `SorterAggregate`
-
-### Method `sort`
-
-* Parameter `$collection` of type `SortableAggregate`
-* Returns `SortableCollection`
