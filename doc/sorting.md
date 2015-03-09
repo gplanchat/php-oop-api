@@ -102,10 +102,10 @@ Used to determine the distance between 2 iterators. The iterators *MUST* by the 
 
 ### Method `seek`
 
-Used to determine seek the iterator, this method already exists, but the prototypes changes
+Used to seek the iterator, this method already exists in `SeekableIterator`, but its prototypes changes slightly
 
 * Parameter `$position`, of type `integer`
-* Parameter `$whence`, of type `integer`, between:
+* Parameter `$whence`, of type `integer`, defaults to `BidirectionalSeekableIterator::SEEK_SET`, values between:
   * `BidirectionalSeekableIterator::SEEK_SET`
   * `BidirectionalSeekableIterator::SEEK_CUR`
   * `BidirectionalSeekableIterator::SEEK_END`
