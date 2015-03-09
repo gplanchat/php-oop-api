@@ -56,7 +56,7 @@ class UserlandQuickSortAlgorithmSorter
         BidirectionalSeekableIterator $last
     ) {
         $pivot = clone $first;
-        $pivot->seek2(ceil($first->distance($last) / 2), BidirectionalSeekableIterator::SEEK_CUR);
+        $pivot->seek(ceil($first->distance($last) / 2), BidirectionalSeekableIterator::SEEK_CUR);
 
         $collection->swap($pivot, $last);
 

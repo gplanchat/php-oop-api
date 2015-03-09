@@ -302,34 +302,31 @@ class UserlandQuickSortAlgorithmSorter
 {
     public function sort(SortableCollection $collection)
     {
-        $start = $collection->first();
-        $end = $collection->last();
-
-        $this->quickSort($collection, $start, $end);
+        $this->quickSort($collection, $collection->first(), $collection->last());
     }
 
-    public function quickSort(
+    private function quickSort(
         SortableCollection $collection,
-        BidirectionalSeekableIterator $start,
-        BidirectionalSeekableIterator $end
+        BidirectionalSeekableIterator $first,
+        BidirectionalSeekableIterator $last
     ) {
-        if ($start->distance($end) > 0) {
-            $pivot = $this->partition($collection, $start, $end);
+        if ($first->distance($last) > 0) {
+            $pivot = $this->partition($collection, $first, $last);
 
             $tmp = clone $pivot;
-            if ($start->distance($tmp) > 1) {
+            if ($first->distance($tmp) > 1) {
                 $tmp->previous();
-                $this->quickSort($collection, $start, $tmp);
-            } else if ($this->compare($pivot, $start)) {
-                $collection->swap($pivot, $start);
+                $this->quickSort($collection, $first, $tmp);
+            } else if ($this->compare($pivot, $first)) {
+                $collection->swap($pivot, $first);
             }
 
             $tmp = clone $pivot;
-            if ($tmp->distance($end) > 1) {
+            if ($tmp->distance($last) > 1) {
                 $tmp->next();
-                $this->quickSort($collection, $tmp, $end);
-            } else if (!$this->compare($pivot, $end)) {
-                $collection->swap($end, $pivot);
+                $this->quickSort($collection, $tmp, $last);
+            } else if (!$this->compare($pivot, $last)) {
+                $collection->swap($last, $pivot);
             }
         }
     }
