@@ -80,6 +80,8 @@ For full example, see [sorting example](../examples/sorting.php)
 
 ## Interface `BidirectionalSeekableIterator`
 
+See [BidirectionalSeekableIterator.php](../classes/BidirectionalSeekableIterator.php)
+
 Extends `SeekableIterator` 
 
 ### Constants
@@ -117,6 +119,8 @@ Seeks the iterator one position ahead
 
 ## Interface `Sortable`
 
+See [BidirectionalSeekableIterator.php](../classes/Sortable.php)
+
 This interface defines no method and cannot be directly implemented in user-space.
 
 * Extends `Traversable`
@@ -127,6 +131,8 @@ This interface defines no method and cannot be directly implemented in user-spac
 This interface defines no method and cannot be directly implemented in user-space.
 
 ## Class `SortableCollection`
+
+See [BidirectionalSeekableIterator.php](../classes/SortableCollection.php)
 
 * Extends `Sortable`
 * Extends `IteratorAggregate`
@@ -161,6 +167,8 @@ Returns a new `BidirectionalSeekableIterator`
 * Returns `BidirectionalSeekableIterator`, positioned to the first element
 
 ## Class `CollectionSorter`
+
+See [BidirectionalSeekableIterator.php](../classes/CollectionSorter.php)
 
 ### Method `sort`
 
