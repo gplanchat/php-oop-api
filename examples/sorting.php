@@ -193,6 +193,11 @@ class FooIterator
 class Foo
     implements SortableCollection, ArrayAccess
 {
+    /**
+     * Public for demonstration purposes only
+     *
+     * @var array
+     */
     public $internal;
 
     /**
