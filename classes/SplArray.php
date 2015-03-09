@@ -421,11 +421,4 @@ class SplArray
      */
     public function jsonSerialize()
     {}
-
-    /**
-     * @param string $serialized
-     * @return string
-     */
-    public function jsonUnserialize(string $serialized)
-    {}
 }
