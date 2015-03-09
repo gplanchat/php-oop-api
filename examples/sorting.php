@@ -1,9 +1,9 @@
 <?php
 
-require __DIR__ . '../classes/Sortable.php';
-require __DIR__ . '../classes/BidirectionalSeekableIterator.php';
-require __DIR__ . '../classes/CollectionSorter.php';
-require __DIR__ . '../classes/SortableCollection.php';
+require __DIR__ . '/../classes/Sortable.php';
+require __DIR__ . '/../classes/BidirectionalSeekableIterator.php';
+require __DIR__ . '/../classes/CollectionSorter.php';
+require __DIR__ . '/../classes/SortableCollection.php';
 
 class FooIterator
     implements BidirectionalSeekableIterator
