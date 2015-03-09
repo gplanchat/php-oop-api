@@ -4,7 +4,7 @@ This document decribes a way to make uniform collections/array sorting in an OO-
 
 It also suggests some new iterator `BidirectionalSeekableIterator` to handle more easily and effectively sortings.
 
-A quicksort (actually very uneffective) could be implemented this way :
+A quicksort (actually very uneffective here) could be implemented this way :
 
 ```php
 <?php

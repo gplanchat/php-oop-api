@@ -12,7 +12,7 @@ interface CollectionSorter
 }
 
 interface SortableCollection
-    extends IteratorAggregate, Sortable
+    extends IteratorAggregate, Sortable, Countable
 {
     /**
      * @param BidirectionalSeekableIterator $leftKey
@@ -35,10 +35,18 @@ interface SortableCollection
      * @return BidirectionalSeekableIterator
      */
     public function getIterator();
+
+    /**
+     * @return array
+     */
+    public function keys();
 }
 
+/**
+ * Note: extends Iterator instead of SeekableIterator due to E_STRICT thrown when a 2nd parameter is added to seek()
+ */
 interface BidirectionalSeekableIterator
-    extends SeekableIterator
+    extends /* SeekableIterator*/ Iterator
 {
     const SEEK_SET = 0;
     const SEEK_CUR = 1;
@@ -55,7 +63,7 @@ interface BidirectionalSeekableIterator
      * @param int $whence
      * @return void
      */
-    public function seek2($position, $whence);
+    public function seek($position, $whence);
 
     /**
      * @return void
@@ -99,7 +107,7 @@ class FooIterator
      */
     public function current()
     {
-        return $this->internalCollection->internal[$this->key()];
+        return $this->internalCollection[$this->key()];
     }
 
     /**
@@ -107,7 +115,7 @@ class FooIterator
      */
     public function key()
     {
-        $keys = array_keys($this->internalCollection->internal);
+        $keys = $this->internalCollection->keys();
         return $keys[$this->index()];
     }
 
@@ -116,7 +124,7 @@ class FooIterator
      */
     public function valid()
     {
-        return $this->index() < count($this->internalCollection->internal);
+        return $this->index() < $this->internalCollection->count();
     }
 
     /**
@@ -128,31 +136,11 @@ class FooIterator
     }
 
     /**
-     * @return void
-     */
-    public function seek($position)
-    {
-        $this->seek2($position, self::SEEK_SET);
-    }
-
-    /**
-     * @param BidirectionalSeekableIterator $friend
-     * @return int
-     */
-    public function distance(BidirectionalSeekableIterator $friend)
-    {
-        return $friend->index() - $this->index();
-    }
-
-    /**
-     *
-     * Note: present due to E_STRICT thrown if the 2nd parameter is added to seek()
-     *
      * @param int $position
      * @param int $whence
      * @return void
      */
-    public function seek2($position, $whence)
+    public function seek($position, $whence = self::SEEK_SET)
     {
         $limit = count($this->internalCollection) - 1;
         if ($whence === self::SEEK_CUR) {
@@ -167,11 +155,20 @@ class FooIterator
     }
 
     /**
+     * @param BidirectionalSeekableIterator $friend
+     * @return int
+     */
+    public function distance(BidirectionalSeekableIterator $friend)
+    {
+        return $friend->index() - $this->index();
+    }
+
+    /**
      * @return void
      */
     public function previous()
     {
-        $this->seek2(-1, self::SEEK_CUR);
+        $this->seek(-1, self::SEEK_CUR);
     }
 
     /**
@@ -179,12 +176,12 @@ class FooIterator
      */
     public function next()
     {
-        $this->seek2(1, self::SEEK_CUR);
+        $this->seek(1, self::SEEK_CUR);
     }
 }
 
 class Foo
-    implements SortableCollection, ArrayAccess, Countable
+    implements SortableCollection, ArrayAccess
 {
     public $internal;
 
@@ -224,7 +221,7 @@ class Foo
     public function first()
     {
         $iterator = $this->getIterator();
-        $iterator->seek2(0, BidirectionalSeekableIterator::SEEK_SET);
+        $iterator->seek(0, BidirectionalSeekableIterator::SEEK_SET);
         return $iterator;
     }
 
@@ -234,7 +231,7 @@ class Foo
     public function last()
     {
         $iterator = $this->getIterator();
-        $iterator->seek2(0, BidirectionalSeekableIterator::SEEK_END);
+        $iterator->seek(0, BidirectionalSeekableIterator::SEEK_END);
         return $iterator;
     }
 
@@ -290,6 +287,14 @@ class Foo
     {
         return count($this->internal);
     }
+
+    /**
+     * @return array
+     */
+    public function keys()
+    {
+        return array_keys($this->internal);
+    }
 }
 
 class UserlandQuickSortAlgorithmSorter
@@ -342,7 +347,7 @@ class UserlandQuickSortAlgorithmSorter
         BidirectionalSeekableIterator $last
     ) {
         $pivot = clone $first;
-        $pivot->seek2(ceil($first->distance($last) / 2), BidirectionalSeekableIterator::SEEK_CUR);
+        $pivot->seek(ceil($first->distance($last) / 2), BidirectionalSeekableIterator::SEEK_CUR);
 
         $collection->swap($pivot, $last);
 
@@ -363,6 +368,24 @@ class UserlandQuickSortAlgorithmSorter
 
 $collections = [];
 $collections[] = new Foo(1, 2, 3, 4, 5, 6, 7);
+$collections[] = new Foo(7, 1, 2, 3, 4, 5, 6);
+$collections[] = new Foo(6, 7, 1, 2, 3, 4, 5);
+$collections[] = new Foo(5, 6, 7, 1, 2, 3, 4);
+$collections[] = new Foo(4, 5, 6, 7, 1, 2, 3);
+$collections[] = new Foo(3, 4, 5, 6, 7, 1, 2);
+$collections[] = new Foo(2, 3, 4, 5, 6, 7, 1);
+
+$collections[] = new Foo(7, 6, 5, 4, 3, 2, 1);
+$collections[] = new Foo(1, 7, 6, 5, 4, 3, 2);
+$collections[] = new Foo(2, 1, 7, 6, 5, 4, 3);
+$collections[] = new Foo(3, 2, 1, 7, 6, 5, 4);
+$collections[] = new Foo(4, 3, 2, 1, 7, 6, 5);
+$collections[] = new Foo(5, 4, 3, 2, 1, 7, 6);
+$collections[] = new Foo(6, 5, 4, 3, 2, 1, 7);
+
+$collections[] = new Foo(3, 1, 2, 5, 4, 7, 6);
+$collections[] = new Foo(6, 1, 2, 5, 4, 7, 3);
+$collections[] = new Foo(1, 2, 3, 4, 5, 6, 7);
 $collections[] = new Foo(4, 1, 6, 7, 3, 2, 5);
 $collections[] = new Foo(7, 6, 5, 4, 2, 1, 3);
 $collections[] = new Foo(2, 6, 3, 4, 1, 5, 7);
@@ -370,16 +393,27 @@ $collections[] = new Foo(5, 3, 7, 1, 4, 2, 6);
 $collections[] = new Foo(3, 6, 2, 5, 1, 7, 4);
 $collections[] = new Foo(3, 6, 2, 5, 1, 7, 4);
 $collections[] = new Foo(4, 3, 2, 7, 1, 5, 6);
-$collections[] = new Foo(3, 1, 2, 5, 4, 7, 6);
 
 $sorter = new UserlandQuickSortAlgorithmSorter();
 
 $i = 0;
 foreach ($collections as $collection) {
     $i++;
+
+    $original = $collection->internal;
+    $native = $collection->internal;
+
+    $nativeStart = microtime(true);
+    sort($native);
+    $nativeEnd = microtime(true);
+
+    $start = microtime(true);
     $sorter->sort($collection);
+    $end = microtime(true);
+
+    printf('(%fus / %fus) [%s]' . PHP_EOL, ($nativeEnd - $nativeStart) * 1000000, ($end - $start) * 1000000, implode(', ', $original));
 
     assert($collection->internal === [1, 2, 3, 4, 5, 6, 7],
-        sprintf('Test %d failed, [%s].', $i, implode(', ', $collection->internal)));
+        sprintf('Test %d failed, [%s] => [%s].', $i, implode(', ', $original), implode(', ', $collection->internal)));
 }
 
