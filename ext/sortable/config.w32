@@ -1,0 +1,7 @@
+// vim:ft=javascript
+
+ARG_ENABLE("sortable", "enable sortable support", "no");
+
+if (PHP_SORTABLE != "no") {
+	EXTENSION("sortable", "sortable.c");
+}

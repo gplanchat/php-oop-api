@@ -28,6 +28,10 @@
 #include "ext/standard/info.h"
 #include "php_sortable.h"
 
+#ifdef COMPILE_DL_SORTABLE
+ZEND_GET_MODULE(sortable)
+#endif
+
 zend_class_entry * sortable_ce_Sortable;
 zend_class_entry * sortable_ce_SortableCollection;
 zend_class_entry * sortable_ce_BidirectionalSeekableIterator;
@@ -734,3 +738,24 @@ PHP_MSHUTDOWN_FUNCTION(sortable)
 {
 	return SUCCESS;
 }
+
+ZEND_MINFO_FUNCTION(scalar_objects)
+{
+}
+
+zend_module_entry sortable_module_entry = {
+	STANDARD_MODULE_HEADER,
+	"sortable",
+	NULL,
+	ZEND_MINIT(sortable),
+	ZEND_MSHUTDOWN(sortable),
+	NULL,
+	NULL,
+	ZEND_MINFO(sortable),
+	"1.0.0-dev0",
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	STANDARD_MODULE_PROPERTIES_EX
+};

@@ -46,6 +46,7 @@ extern zend_module_entry sortable_module_entry;
 
 PHP_MINIT_FUNCTION(sortable);
 PHP_MSHUTDOWN_FUNCTION(sortable);
+ZEND_MINFO_FUNCTION(scalar_objects);
 
 #ifdef ZTS
 # define SORTABLEG(v) TSRMG(sortable_globals_id, zend_sortable_globals *, v)
