@@ -75,6 +75,17 @@ ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_CollectionSorter_sort, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, collection, SortableCollection, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_CollectionSorter_quickSort, 0, 0, 2)
+	ZEND_ARG_OBJ_INFO(0, left, BidirectionalSeekableIterator, 0)
+	ZEND_ARG_OBJ_INFO(0, right, BidirectionalSeekableIterator, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_CollectionSorter_partition, 0, 0, 3)
+	ZEND_ARG_OBJ_INFO(0, collection, SortableCollection, 0)
+	ZEND_ARG_OBJ_INFO(0, first, BidirectionalSeekableIterator, 0)
+	ZEND_ARG_OBJ_INFO(0, last, BidirectionalSeekableIterator, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_CollectionSorter_compare, 0, 0, 2)
 	ZEND_ARG_OBJ_INFO(0, left, BidirectionalSeekableIterator, 0)
 	ZEND_ARG_OBJ_INFO(0, right, BidirectionalSeekableIterator, 0)
@@ -101,7 +112,7 @@ ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableArrayIterator_seek,
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_sort, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, collection, SortableCollection, 0)
+	ZEND_ARG_ARRAY_INFO(0, collection, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_quickSort, 0, 0, 3)
@@ -111,7 +122,7 @@ ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_quickSort, 0, 0, 3)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_partition, 0, 0, 3)
-	ZEND_ARG_OBJ_INFO(0, collection, SortableCollection, 0)
+	ZEND_ARG_ARRAY_INFO(0, collection, 0)
 	ZEND_ARG_OBJ_INFO(0, first, BidirectionalSeekableIterator, 0)
 	ZEND_ARG_OBJ_INFO(0, last, BidirectionalSeekableIterator, 0)
 ZEND_END_ARG_INFO()
@@ -140,6 +151,83 @@ ZEND_METHOD(SortableCollection, swap)
 	ZEND_PARSE_PARAMETERS_START(2, 2)
 		Z_PARAM_OBJECT_OF_CLASS(param_leftKey_obj, sortable_ce_BidirectionalSeekableIterator)
 		Z_PARAM_OBJECT_OF_CLASS(param_rightKey_obj, sortable_ce_BidirectionalSeekableIterator)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
+}
+/* }}} */
+
+/* {{{ proto mixed CollectionSorter::sort(
+   SortableCollection $collection
+) */
+ZEND_METHOD(CollectionSorter, sort)
+{
+	zval* param_collection_obj;
+
+#ifndef FAST_ZPP
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &param_collection_obj,
+		sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		RETURN_NULL();
+	}
+#else
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_BidirectionalSeekableIterator)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
+}
+/* }}} */
+
+/* {{{ proto mixed CollectionSorter::quickSort(
+   SortableCollection $collection,
+   BidirectionalSeekableIterator $first,
+   BidirectionalSeekableIterator $last
+) */
+ZEND_METHOD(CollectionSorter, quickSort)
+{
+	zval* param_collection_obj;
+	zval* param_first_obj;
+	zval* param_last_obj;
+
+#ifndef FAST_ZPP
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OOO", &param_collection_obj,
+		sortable_ce_SortableCollection, &param_first_obj, sortable_ce_BidirectionalSeekableIterator,
+		&param_last_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		RETURN_NULL();
+	}
+#else
+	ZEND_PARSE_PARAMETERS_START(3, 3)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_SortableCollection)
+		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, sortable_ce_BidirectionalSeekableIterator)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
+}
+/* }}} */
+
+/* {{{ proto mixed CollectionSorter::partition(
+   SortableCollection $collection,
+   BidirectionalSeekableIterator $first,
+   BidirectionalSeekableIterator $last
+) */
+ZEND_METHOD(CollectionSorter, partition)
+{
+	zval* param_collection_obj;
+	zval* param_first_obj;
+	zval* param_last_obj;
+
+#ifndef FAST_ZPP
+	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OOO", &param_collection_obj,
+		sortable_ce_SortableCollection, &param_first_obj, sortable_ce_BidirectionalSeekableIterator,
+		&param_last_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		RETURN_NULL();
+	}
+#else
+	ZEND_PARSE_PARAMETERS_START(3, 3)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_SortableCollection)
+		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, sortable_ce_BidirectionalSeekableIterator)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -366,31 +454,6 @@ ZEND_METHOD(ArraySorter, partition)
 }
 /* }}} */
 
-/* {{{ proto mixed ArraySorter::compare(
-   BidirectionalSeekableIterator $left,
-   BidirectionalSeekableIterator $right
-) */
-ZEND_METHOD(ArraySorter, compare)
-{
-	zval* param_left_obj;
-	zval* param_right_obj;
-
-#ifndef FAST_ZPP
-	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OO", &param_left_obj,
-		sortable_ce_BidirectionalSeekableIterator, &param_right_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
-		RETURN_NULL();
-	}
-#else
-	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(param_left_obj, sortable_ce_BidirectionalSeekableIterator)
-		Z_PARAM_OBJECT_OF_CLASS(param_right_obj, sortable_ce_BidirectionalSeekableIterator)
-	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-}
-/* }}} */
-
-
 const zend_function_entry sortable_fe_SortableCollection[] = {
 	ZEND_ABSTRACT_ME(SortableCollection, swap, sortable_arginfo_SortableCollection_swap)
 	ZEND_ABSTRACT_ME(SortableCollection, first, NULL)
@@ -422,7 +485,9 @@ const zend_function_entry sortable_fe_Sorter[] = {
 };
 
 const zend_function_entry sortable_fe_CollectionSorter[] = {
-	ZEND_ABSTRACT_ME(CollectionSorter, sort, sortable_arginfo_CollectionSorter_sort)
+	PHP_ME(CollectionSorter, sort, sortable_arginfo_ArraySorter_sort, ZEND_ACC_PUBLIC | ZEND_ACC_FINAL)
+	PHP_ME(CollectionSorter, quickSort, sortable_arginfo_ArraySorter_quickSort, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	PHP_ME(CollectionSorter, partition, sortable_arginfo_ArraySorter_partition, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
 	ZEND_ABSTRACT_ME(CollectionSorter, compare, sortable_arginfo_CollectionSorter_compare)
 	PHP_FE_END
 };
@@ -443,10 +508,10 @@ const zend_function_entry sortable_fe_BidirectionalSeekableArrayIterator[] = {
 };
 
 const zend_function_entry sortable_fe_ArraySorter[] = {
-	PHP_ME(ArraySorter, sort, sortable_arginfo_ArraySorter_sort, ZEND_ACC_PUBLIC)
-	PHP_ME(ArraySorter, quickSort, sortable_arginfo_ArraySorter_quickSort, ZEND_ACC_PUBLIC)
-	PHP_ME(ArraySorter, partition, sortable_arginfo_ArraySorter_partition, ZEND_ACC_PUBLIC)
-	PHP_ME(ArraySorter, compare, sortable_arginfo_ArraySorter_compare, ZEND_ACC_PUBLIC | ZEND_ACC_ABSTRACT)
+	PHP_ME(ArraySorter, sort, sortable_arginfo_ArraySorter_sort, ZEND_ACC_PUBLIC | ZEND_ACC_FINAL)
+	PHP_ME(ArraySorter, quickSort, sortable_arginfo_ArraySorter_quickSort, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	PHP_ME(ArraySorter, partition, sortable_arginfo_ArraySorter_partition, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	ZEND_ABSTRACT_ME(ArraySorter, compare, sortable_arginfo_ArraySorter_compare)
 	PHP_FE_END
 };
 
@@ -487,6 +552,7 @@ void sortable_register_class_CollectionSorter(zend_class_entry **ppce)
 	zend_class_entry ce;
 	INIT_CLASS_ENTRY(ce, "CollectionSorter", sortable_fe_CollectionSorter);
 	*ppce = zend_register_internal_class(&ce);
+	(*ppce)->ce_flags |= ZEND_ACC_ABSTRACT;
 
 	zend_class_implements(*ppce, 1, sortable_ce_Sorter);
 }
@@ -505,6 +571,7 @@ void sortable_register_class_ArraySorter(zend_class_entry **ppce)
 	zend_class_entry ce;
 	INIT_CLASS_ENTRY(ce, "ArraySorter", sortable_fe_ArraySorter);
 	*ppce = zend_register_internal_class(&ce);
+	(*ppce)->ce_flags |= ZEND_ACC_ABSTRACT;
 
 	zend_class_implements(*ppce, 1, sortable_ce_Sorter);
 }
@@ -526,7 +593,7 @@ SORTABLE_API zend_class_entry *sortable_get_class_BidirectionalSeekableIterator(
 
 SORTABLE_API zend_class_entry *sortable_get_class_Sorter()
 {
-	return sortable_ce_CollectionSorter;
+	return sortable_ce_Sorter;
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_CollectionSorter()
@@ -552,8 +619,8 @@ PHP_MINIT_FUNCTION(sortable)
 	sortable_register_class_BidirectionalSeekableIterator(&sortable_ce_BidirectionalSeekableIterator);
 	sortable_register_class_Sorter(&sortable_ce_Sorter);
 	sortable_register_class_CollectionSorter(&sortable_ce_CollectionSorter);
-	sortable_register_class_BidirectionalSeekableArrayIterator(&sortable_ce_BidirectionalSeekableArrayIterator);
-	sortable_register_class_ArraySorter(&sortable_ce_ArraySorter);
+	//sortable_register_class_BidirectionalSeekableArrayIterator(&sortable_ce_BidirectionalSeekableArrayIterator);
+	//sortable_register_class_ArraySorter(&sortable_ce_ArraySorter);
 
 	return SUCCESS;
 }
