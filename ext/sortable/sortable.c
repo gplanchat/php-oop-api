@@ -548,12 +548,12 @@ SORTABLE_API zend_class_entry *sortable_get_class_ArraySorter()
 PHP_MINIT_FUNCTION(sortable)
 {
 	sortable_register_class_Sortable(&sortable_ce_Sortable);
-	//sortable_register_class_SortableCollection(&sortable_ce_SortableCollection);
+	sortable_register_class_SortableCollection(&sortable_ce_SortableCollection);
 	sortable_register_class_BidirectionalSeekableIterator(&sortable_ce_BidirectionalSeekableIterator);
-	//sortable_register_class_Sorter(&sortable_ce_Sorter);
-	//sortable_register_class_CollectionSorter(&sortable_ce_CollectionSorter);
-	//sortable_register_class_BidirectionalSeekableArrayIterator(&sortable_ce_BidirectionalSeekableArrayIterator);
-	//sortable_register_class_ArraySorter(&sortable_ce_ArraySorter);
+	sortable_register_class_Sorter(&sortable_ce_Sorter);
+	sortable_register_class_CollectionSorter(&sortable_ce_CollectionSorter);
+	sortable_register_class_BidirectionalSeekableArrayIterator(&sortable_ce_BidirectionalSeekableArrayIterator);
+	sortable_register_class_ArraySorter(&sortable_ce_ArraySorter);
 
 	return SUCCESS;
 }
