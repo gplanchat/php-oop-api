@@ -254,7 +254,7 @@ class Foo
     }
 }
 
-class UserlandQuickSortAlgorithmSorter
+class FooSorter
     extends CollectionSorter
 {
     /**
@@ -324,7 +324,7 @@ $collections[] = new Foo(3, 6, 2, 5, 1, 7, 4);
 $collections[] = new Foo(3, 6, 2, 5, 1, 7, 4);
 $collections[] = new Foo(4, 3, 2, 7, 1, 5, 6);
 
-$sorter = new UserlandQuickSortAlgorithmSorter();
+$sorter = new FooSorter();
 $reverseSorter = new ReverseSorter($sorter);
 
 $i = 0;
