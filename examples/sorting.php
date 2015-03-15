@@ -1,8 +1,11 @@
 <?php
 
-spl_autoload_register(function($classname){
+spl_autoload_register(function($className) {
+    if (strpos($className, 'Spl\\') === 0) {
+        return;
+    }
     $path = __DIR__ . '/../classes/' .
-        str_replace(['_', '\\'], DIRECTORY_SEPARATOR, $classname) . '.php';
+        str_replace(['_', '\\'], DIRECTORY_SEPARATOR, substr($className, 4)) . '.php';
 
     if (file_exists($path)) {
         echo $path . PHP_EOL;
@@ -10,11 +13,13 @@ spl_autoload_register(function($classname){
     }
 });
 
+var_dump((new ReflectionExtension('sortable'))->getClassNames());
+
 class FooIterator
-    implements BidirectionalSeekableIterator
+    implements Spl\BidirectionalSeekableIterator
 {
     /**
-     * @var SortableCollection
+     * @var Spl\SortableCollection
      */
     private $internalCollection;
 
@@ -34,9 +39,9 @@ class FooIterator
     private $lastItem;
 
     /**
-     * @param SortableCollection $collection
+     * @param Spl\SortableCollection $collection
      */
-    public function __construct(SortableCollection $collection)
+    public function __construct(Spl\SortableCollection $collection)
     {
         $this->internalCollection = $collection;
         $this->currentIndex = 0;
@@ -105,10 +110,10 @@ class FooIterator
     }
 
     /**
-     * @param BidirectionalSeekableIterator $friend
+     * @param Spl\BidirectionalSeekableIterator $friend
      * @return int
      */
-    public function distance(BidirectionalSeekableIterator $friend)
+    public function distance(Spl\BidirectionalSeekableIterator $friend)
     {
         return $friend->index() - $this->index();
     }
@@ -133,7 +138,7 @@ class FooIterator
 }
 
 class Foo
-    implements SortableCollection, ArrayAccess
+    implements Spl\SortableCollection, ArrayAccess
 {
     /**
      * Public for demonstration purposes only
@@ -151,21 +156,21 @@ class Foo
     }
 
     /**
-     * @param BidirectionalSeekableIterator $start
-     * @param BidirectionalSeekableIterator $end
+     * @param Spl\BidirectionalSeekableIterator $start
+     * @param Spl\BidirectionalSeekableIterator $end
      * @return array
      */
-    public function dump(BidirectionalSeekableIterator $start, BidirectionalSeekableIterator $end)
+    public function dump(Spl\BidirectionalSeekableIterator $start, Spl\BidirectionalSeekableIterator $end)
     {
         return array_slice($this->internal, $start->index(), $start->distance($end));
     }
 
     /**
-     * @param BidirectionalSeekableIterator $leftKey
-     * @param BidirectionalSeekableIterator $rightKey
+     * @param Spl\BidirectionalSeekableIterator $leftKey
+     * @param Spl\BidirectionalSeekableIterator $rightKey
      * @return void
      */
-    public function swap(BidirectionalSeekableIterator $leftKey, BidirectionalSeekableIterator $rightKey)
+    public function swap(Spl\BidirectionalSeekableIterator $leftKey, Spl\BidirectionalSeekableIterator $rightKey)
     {
         $tmp = $this->internal[$leftKey->key()];
         $this->internal[$leftKey->key()] = $this->internal[$rightKey->key()];
@@ -173,7 +178,7 @@ class Foo
     }
 
     /**
-     * @return BidirectionalSeekableIterator
+     * @return Spl\BidirectionalSeekableIterator
      */
     public function first()
     {
@@ -183,7 +188,7 @@ class Foo
     }
 
     /**
-     * @return BidirectionalSeekableIterator
+     * @return Spl\BidirectionalSeekableIterator
      */
     public function last()
     {
@@ -193,7 +198,7 @@ class Foo
     }
 
     /**
-     * @return BidirectionalSeekableIterator
+     * @return Spl\BidirectionalSeekableIterator
      */
     public function getIterator()
     {
@@ -255,42 +260,42 @@ class Foo
 }
 
 class FooSorter
-    extends CollectionSorter
+    extends Spl\CollectionSorter
 {
     /**
-     * @param BidirectionalSeekableIterator $left
-     * @param BidirectionalSeekableIterator $right
+     * @param Spl\BidirectionalSeekableIterator $left
+     * @param Spl\BidirectionalSeekableIterator $right
      * @return bool
      */
     public function compare(
-        BidirectionalSeekableIterator $left,
-        BidirectionalSeekableIterator $right
+        Spl\BidirectionalSeekableIterator $left,
+        Spl\BidirectionalSeekableIterator $right
     ) {
         return (bool) ($left->current() < $right->current());
     }
 }
 
 class ReverseSorter
-    extends CollectionSorter
+    extends Spl\CollectionSorter
 {
     /**
-     * @var CollectionSorter
+     * @var Spl\CollectionSorter
      */
     private $internal;
 
-    public function __construct(CollectionSorter $internal)
+    public function __construct(Spl\CollectionSorter $internal)
     {
         $this->internal = $internal;
     }
 
     /**
-     * @param BidirectionalSeekableIterator $left
-     * @param BidirectionalSeekableIterator $right
+     * @param Spl\BidirectionalSeekableIterator $left
+     * @param Spl\BidirectionalSeekableIterator $right
      * @return bool
      */
     public function compare(
-        BidirectionalSeekableIterator $left,
-        BidirectionalSeekableIterator $right
+        Spl\BidirectionalSeekableIterator $left,
+        Spl\BidirectionalSeekableIterator $right
     ) {
         return !$this->internal->compare($left, $right);
     }

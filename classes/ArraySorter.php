@@ -1,7 +1,9 @@
 <?php
 
+namespace Spl;
+
 abstract class ArraySorter
-    implements CollectionSorter
+    implements Sorter
 {
     /**
      * @param SortableCollection $collection

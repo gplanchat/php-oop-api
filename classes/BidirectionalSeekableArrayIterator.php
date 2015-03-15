@@ -1,5 +1,7 @@
 <?php
 
+namespace Spl;
+
 class BidirectionalSeekableArrayIterator
     implements BidirectionalSeekableIterator
 {

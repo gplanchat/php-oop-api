@@ -1,7 +1,9 @@
 <?php
 
+namespace Spl;
+
 class SplArray
-    implements SortableCollection, BidirectionalSeekableIterator, Serializable, JsonSerializable, ArrayAccess
+    implements SortableCollection, BidirectionalSeekableIterator, \Serializable, \JsonSerializable, \ArrayAccess
 {
     const EXTR_OVERWRITE  = EXTR_OVERWRITE;
     const EXTR_IF_EXISTS  = EXTR_IF_EXISTS;
@@ -14,11 +16,11 @@ class SplArray
     const EXTR_PREFIX_SAME      = EXTR_PREFIX_SAME;
 
     /**
-     * @param Traversable $keys
-     * @param Traversable $values
+     * @param \Traversable $keys
+     * @param \Traversable $values
      * @return array
      */
-    public static function combine(Traversable $keys, Traversable $values)
+    public static function combine(\Traversable $keys, \Traversable $values)
     {}
 
     /**

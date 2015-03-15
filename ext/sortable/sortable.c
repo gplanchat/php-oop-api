@@ -35,6 +35,8 @@
 
 #include "php_sortable.h"
 
+#include "../mutagen/mutagen.h"
+
 #ifdef COMPILE_DL_SORTABLE
 ZEND_GET_MODULE(sortable)
 #endif
@@ -44,96 +46,102 @@ zval* sortable_call_method(zval *object, zend_class_entry *obj_ce, zend_function
 
 static zend_object_handlers sortable_handlers;
 
-zend_class_entry * sortable_ce_Sortable;
-zend_class_entry * sortable_ce_SortableCollection;
-zend_class_entry * sortable_ce_BidirectionalSeekableIterator;
-zend_class_entry * sortable_ce_Sorter;
-zend_class_entry * sortable_ce_CollectionSorter;
-zend_class_entry * sortable_ce_BidirectionalSeekableArrayIterator;
-zend_class_entry * sortable_ce_ArraySorter;
+MUTAGEN_CLASS(Spl, Sortable);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_SortableCollection_swap, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, leftKey, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, rightKey, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_CLASS(Spl, SortableCollection);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableIterator_distance, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, friend, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_CLASS(Spl, BidirectionalSeekableIterator);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableIterator_previous, 0, 0, 0)
-	ZEND_ARG_INFO(0, offset)
-ZEND_END_ARG_INFO()
+MUTAGEN_CLASS(Spl, Sorter);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableIterator_next, 0, 0, 0)
-	ZEND_ARG_INFO(0, offset)
-ZEND_END_ARG_INFO()
+MUTAGEN_CLASS(Spl, CollectionSorter);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableIterator_seek, 0, 0, 1)
-	ZEND_ARG_INFO(0, position)
-ZEND_END_ARG_INFO()
+MUTAGEN_CLASS(Spl, BidirectionalSeekableArrayIterator);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_Sorter_sort, 0, 0, 1)
-	ZEND_ARG_INFO(0, collection)
-ZEND_END_ARG_INFO()
+MUTAGEN_CLASS(Spl, ArraySorter);
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_Sorter_compare, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, left, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, right, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, SortableCollection, swap, 2)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(leftKey, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(rightKey, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_CollectionSorter_quickSort, 0, 0, 3)
-	ZEND_ARG_OBJ_INFO(0, collection, SortableCollection, 0)
-	ZEND_ARG_OBJ_INFO(0, left, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, right, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableIterator, distance, 1)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(friend, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_CollectionSorter_partition, 0, 0, 3)
-	ZEND_ARG_OBJ_INFO(0, collection, SortableCollection, 0)
-	ZEND_ARG_OBJ_INFO(0, first, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, last, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableIterator, previous, 0)
+	MUTAGEN_METHOD_PARAM_LONG(offset, 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableArrayIterator___construct, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, subject, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableIterator, next, 0)
+	MUTAGEN_METHOD_PARAM_LONG(offset, 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableArrayIterator_distance, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, friend, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableIterator, seek, 1)
+	MUTAGEN_METHOD_PARAM_LONG(position, 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableArrayIterator_previous, 0, 0, 0)
-	ZEND_ARG_INFO(0, offset)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, Sorter, sort, 1)
+	MUTAGEN_METHOD_PARAM_ARRAY_OR_OBJECT(collection, 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableArrayIterator_next, 0, 0, 0)
-	ZEND_ARG_INFO(0, offset)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, Sorter, compare, 2)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(left, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(right, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_BidirectionalSeekableArrayIterator_seek, 0, 0, 1)
-	ZEND_ARG_INFO(0, position)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, CollectionSorter, quickSort, 3)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(collection, MUTAGEN_CLASS_REF(Spl, SortableCollection), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(first, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(last, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_sort, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, collection, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, CollectionSorter, partition, 3)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(collection, MUTAGEN_CLASS_REF(Spl, SortableCollection), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(first, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(last, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_quickSort, 0, 0, 3)
-	ZEND_ARG_ARRAY_INFO(0, collection, 0)
-	ZEND_ARG_OBJ_INFO(0, first, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, last, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableArrayIterator, __construct, 1)
+	MUTAGEN_METHOD_PARAM_ARRAY(subject, 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_partition, 0, 0, 3)
-	ZEND_ARG_ARRAY_INFO(0, collection, 0)
-	ZEND_ARG_OBJ_INFO(0, first, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, last, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableArrayIterator, distance, 1)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(friend, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
-ZEND_BEGIN_ARG_INFO_EX(sortable_arginfo_ArraySorter_compare, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, left, BidirectionalSeekableIterator, 0)
-	ZEND_ARG_OBJ_INFO(0, right, BidirectionalSeekableIterator, 0)
-ZEND_END_ARG_INFO()
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableArrayIterator, previous, 0)
+	MUTAGEN_METHOD_PARAM_LONG(offset, 0)
+MUTAGEN_METHOD_DEF_END()
+
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableArrayIterator, next, 0)
+	MUTAGEN_METHOD_PARAM_LONG(offset, 0)
+MUTAGEN_METHOD_DEF_END()
+
+MUTAGEN_METHOD_DEF_START(Spl, BidirectionalSeekableArrayIterator, seek, 1)
+	MUTAGEN_METHOD_PARAM_LONG(position, 0)
+MUTAGEN_METHOD_DEF_END()
+
+MUTAGEN_METHOD_DEF_START(Spl, ArraySorter, sort, 1)
+	MUTAGEN_METHOD_PARAM_ARRAY(collection, 0)
+MUTAGEN_METHOD_DEF_END()
+
+MUTAGEN_METHOD_DEF_START(Spl, ArraySorter, quickSort, 3)
+	MUTAGEN_METHOD_PARAM_ARRAY(collection, 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(first, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(last, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
+
+MUTAGEN_METHOD_DEF_START(Spl, ArraySorter, partition, 3)
+	MUTAGEN_METHOD_PARAM_ARRAY(collection, 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(first, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(last, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
+
+MUTAGEN_METHOD_DEF_START(Spl, ArraySorter, compare, 2)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(left, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+	MUTAGEN_METHOD_PARAM_OBJECT_OF_CLASS(right, MUTAGEN_CLASS_REF(Spl, BidirectionalSeekableIterator), 0)
+MUTAGEN_METHOD_DEF_END()
 
 /* {{{ proto mixed CollectionSorter::sort(
    SortableCollection $collection
@@ -144,7 +152,7 @@ ZEND_METHOD(CollectionSorter, sort)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &param_collection_obj,
-		sortable_ce_SortableCollection) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, SortableCollection)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
@@ -177,14 +185,14 @@ ZEND_METHOD(CollectionSorter, quickSort)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OOO", &param_collection_obj,
-		sortable_ce_SortableCollection, &param_first_obj, sortable_ce_BidirectionalSeekableIterator,
-		&param_last_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, SortableCollection), &param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator),
+		&param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_SortableCollection)
-		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, MUTAGEN_CLASS_ENTRY(Spl, SortableCollection))
+		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
 		Z_PARAM_OBJECT(param_last_obj)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
@@ -256,15 +264,15 @@ ZEND_METHOD(CollectionSorter, partition)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OOO", &param_collection_obj,
-		sortable_ce_SortableCollection, &param_first_obj, sortable_ce_BidirectionalSeekableIterator,
-		&param_last_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, SortableCollection), &param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator),
+		&param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_SortableCollection)
-		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, sortable_ce_BidirectionalSeekableIterator)
-		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, MUTAGEN_CLASS_ENTRY(Spl, SortableCollection))
+		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
+		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -347,12 +355,12 @@ ZEND_METHOD(BidirectionalSeekableArrayIterator, distance)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &param_friend_obj,
-		sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(param_friend_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_friend_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -479,12 +487,12 @@ ZEND_METHOD(ArraySorter, sort)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "O", &param_collection_obj,
-		sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -505,15 +513,15 @@ ZEND_METHOD(ArraySorter, quickSort)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OOO", &param_collection_obj,
-		sortable_ce_SortableCollection, &param_first_obj, sortable_ce_BidirectionalSeekableIterator,
-		&param_last_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, SortableCollection), &param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator),
+		&param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_SortableCollection)
-		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, sortable_ce_BidirectionalSeekableIterator)
-		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, MUTAGEN_CLASS_ENTRY(Spl, SortableCollection))
+		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
+		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -534,15 +542,15 @@ ZEND_METHOD(ArraySorter, partition)
 
 #ifndef FAST_ZPP
 	if (zend_parse_method_parameters(ZEND_NUM_ARGS(), getThis(), "OOO", &param_collection_obj,
-		sortable_ce_SortableCollection, &param_first_obj, sortable_ce_BidirectionalSeekableIterator,
-		&param_last_obj, sortable_ce_BidirectionalSeekableIterator) == FAILURE) {
+		MUTAGEN_CLASS_ENTRY(Spl, SortableCollection), &param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator),
+		&param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator)) == FAILURE) {
 		RETURN_NULL();
 	}
 #else
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, sortable_ce_SortableCollection)
-		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, sortable_ce_BidirectionalSeekableIterator)
-		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, sortable_ce_BidirectionalSeekableIterator)
+		Z_PARAM_OBJECT_OF_CLASS(param_collection_obj, MUTAGEN_CLASS_ENTRY(Spl, SortableCollection))
+		Z_PARAM_OBJECT_OF_CLASS(param_first_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
+		Z_PARAM_OBJECT_OF_CLASS(param_last_obj, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -551,22 +559,22 @@ ZEND_METHOD(ArraySorter, partition)
 /* }}} */
 
 const zend_function_entry sortable_fe_SortableCollection[] = {
-	ZEND_ABSTRACT_ME(SortableCollection, swap, sortable_arginfo_SortableCollection_swap)
-	ZEND_ABSTRACT_ME(SortableCollection, first, NULL)
-	ZEND_ABSTRACT_ME(SortableCollection, last, NULL)
-	ZEND_ABSTRACT_ME(SortableCollection, getIterator, NULL)
-	ZEND_ABSTRACT_ME(SortableCollection, keys, NULL)
-	ZEND_ABSTRACT_ME(SortableCollection, count, NULL)
+	ZEND_ABSTRACT_ME(SplCollection, swap, MUTAGEN_ARG_INFO(Spl, SortableCollection, swap))
+	ZEND_ABSTRACT_ME(SplCollection, first, NULL)
+	ZEND_ABSTRACT_ME(SplCollection, last, NULL)
+	ZEND_ABSTRACT_ME(SplCollection, getIterator, NULL)
+	ZEND_ABSTRACT_ME(SplCollection, keys, NULL)
+	ZEND_ABSTRACT_ME(SplCollection, count, NULL)
 	PHP_FE_END
 };
 
 const zend_function_entry sortable_fe_BidirectionalSeekableIterator[] = {
-	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, distance, sortable_arginfo_BidirectionalSeekableIterator_distance)
-	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, previous, sortable_arginfo_BidirectionalSeekableIterator_previous)
-	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, next, sortable_arginfo_BidirectionalSeekableIterator_next)
+	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, distance, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableIterator, distance))
+	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, previous, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableIterator, previous))
+	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, next, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableIterator, next))
 	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, index, NULL)
 	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, end, NULL)
-	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, seek, sortable_arginfo_BidirectionalSeekableIterator_seek)
+	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, seek, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableIterator, seek))
 	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, current, NULL)
 	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, key, NULL)
 	ZEND_ABSTRACT_ME(BidirectionalSeekableIterator, valid, NULL)
@@ -575,56 +583,56 @@ const zend_function_entry sortable_fe_BidirectionalSeekableIterator[] = {
 };
 
 const zend_function_entry sortable_fe_Sorter[] = {
-	ZEND_ABSTRACT_ME(Sorter, sort, sortable_arginfo_Sorter_sort)
-	ZEND_ABSTRACT_ME(Sorter, compare, sortable_arginfo_Sorter_compare)
+	ZEND_ABSTRACT_ME(Sorter, sort, MUTAGEN_ARG_INFO(Spl, Sorter, sort))
+	ZEND_ABSTRACT_ME(Sorter, compare, MUTAGEN_ARG_INFO(Spl, Sorter, compare))
 	PHP_FE_END
 };
 
 const zend_function_entry sortable_fe_CollectionSorter[] = {
-	PHP_ME(CollectionSorter, sort, sortable_arginfo_Sorter_sort, ZEND_ACC_PUBLIC | ZEND_ACC_FINAL)
-	PHP_ME(CollectionSorter, quickSort, sortable_arginfo_CollectionSorter_quickSort, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
-	PHP_ME(CollectionSorter, partition, sortable_arginfo_CollectionSorter_partition, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
-	ZEND_ABSTRACT_ME(CollectionSorter, compare, sortable_arginfo_Sorter_compare)
+	PHP_ME(CollectionSorter, sort, MUTAGEN_ARG_INFO(Spl, Sorter, sort), ZEND_ACC_PUBLIC | ZEND_ACC_FINAL)
+	PHP_ME(CollectionSorter, quickSort, MUTAGEN_ARG_INFO(Spl, CollectionSorter, quickSort), ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	PHP_ME(CollectionSorter, partition, MUTAGEN_ARG_INFO(Spl, CollectionSorter, partition), ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	ZEND_ABSTRACT_ME(CollectionSorter, compare, MUTAGEN_ARG_INFO(Spl, Sorter, compare))
 	PHP_FE_END
 };
 
 const zend_function_entry sortable_fe_BidirectionalSeekableArrayIterator[] = {
-	PHP_ME(BidirectionalSeekableArrayIterator, __construct, sortable_arginfo_BidirectionalSeekableArrayIterator___construct, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
-	PHP_ME(BidirectionalSeekableArrayIterator, distance, sortable_arginfo_BidirectionalSeekableArrayIterator_distance, ZEND_ACC_PUBLIC)
-	PHP_ME(BidirectionalSeekableArrayIterator, previous, sortable_arginfo_BidirectionalSeekableArrayIterator_previous, ZEND_ACC_PUBLIC)
-	PHP_ME(BidirectionalSeekableArrayIterator, next, sortable_arginfo_BidirectionalSeekableArrayIterator_next, ZEND_ACC_PUBLIC)
+	PHP_ME(BidirectionalSeekableArrayIterator, __construct, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableArrayIterator, __construct), ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
+	PHP_ME(BidirectionalSeekableArrayIterator, distance, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableArrayIterator, distance), ZEND_ACC_PUBLIC)
+	PHP_ME(BidirectionalSeekableArrayIterator, previous, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableArrayIterator, previous), ZEND_ACC_PUBLIC)
+	PHP_ME(BidirectionalSeekableArrayIterator, next, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableArrayIterator, next), ZEND_ACC_PUBLIC)
 	PHP_ME(BidirectionalSeekableArrayIterator, index, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(BidirectionalSeekableArrayIterator, end, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(BidirectionalSeekableArrayIterator, current, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(BidirectionalSeekableArrayIterator, key, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(BidirectionalSeekableArrayIterator, valid, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(BidirectionalSeekableArrayIterator, rewind, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(BidirectionalSeekableArrayIterator, seek, sortable_arginfo_BidirectionalSeekableArrayIterator_seek, ZEND_ACC_PUBLIC)
+	PHP_ME(BidirectionalSeekableArrayIterator, seek, MUTAGEN_ARG_INFO(Spl, BidirectionalSeekableArrayIterator, seek), ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };
 
 const zend_function_entry sortable_fe_ArraySorter[] = {
-	PHP_ME(ArraySorter, sort, sortable_arginfo_ArraySorter_sort, ZEND_ACC_PUBLIC | ZEND_ACC_FINAL)
-	PHP_ME(ArraySorter, quickSort, sortable_arginfo_ArraySorter_quickSort, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
-	PHP_ME(ArraySorter, partition, sortable_arginfo_ArraySorter_partition, ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
-	ZEND_ABSTRACT_ME(ArraySorter, compare, sortable_arginfo_ArraySorter_compare)
+	PHP_ME(ArraySorter, sort, MUTAGEN_ARG_INFO(Spl, ArraySorter, sort), ZEND_ACC_PUBLIC | ZEND_ACC_FINAL)
+	PHP_ME(ArraySorter, quickSort, MUTAGEN_ARG_INFO(Spl, ArraySorter, quickSort), ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	PHP_ME(ArraySorter, partition, MUTAGEN_ARG_INFO(Spl, ArraySorter, partition), ZEND_ACC_PROTECTED | ZEND_ACC_FINAL)
+	ZEND_ABSTRACT_ME(ArraySorter, compare, MUTAGEN_ARG_INFO(Spl, ArraySorter, compare))
 	PHP_FE_END
 };
 
 static void sortable_register_class_Sortable(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "Sortable", NULL);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "Sortable"), NULL);
 	*ppce = zend_register_internal_interface(&ce);
 }
 
 static void sortable_register_class_SortableCollection(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "SortableCollection", sortable_fe_SortableCollection);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "SortableCollection"), sortable_fe_SortableCollection);
 	*ppce = zend_register_internal_interface(&ce);
 
-	zend_class_implements(*ppce, 1, sortable_ce_Sortable);
+	zend_class_implements(*ppce, 1, MUTAGEN_CLASS_ENTRY(Spl, Sortable));
 
 	//(*ppce)->interface_gets_implemented = sortable_implement_SortableCollection;
 }
@@ -632,81 +640,82 @@ static void sortable_register_class_SortableCollection(zend_class_entry **ppce)
 static void sortable_register_class_BidirectionalSeekableIterator(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "BidirectionalSeekableIterator", sortable_fe_BidirectionalSeekableIterator);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "BidirectionalSeekableIterator"), sortable_fe_BidirectionalSeekableIterator);
 	*ppce = zend_register_internal_interface(&ce);
 
-	zend_class_implements(*ppce, 1, spl_ce_SeekableIterator);
+	//zend_class_implements(*ppce, 1, spl_ce_SeekableIterator);
+	zend_class_implements(*ppce, 1, zend_ce_iterator);
 }
 
 static void sortable_register_class_Sorter(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "Sorter", sortable_fe_Sorter);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "Sorter"), sortable_fe_Sorter);
 	*ppce = zend_register_internal_interface(&ce);
 }
 
 static void sortable_register_class_CollectionSorter(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "CollectionSorter", sortable_fe_CollectionSorter);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "CollectionSorter"), sortable_fe_CollectionSorter);
 	*ppce = zend_register_internal_class(&ce);
 	(*ppce)->ce_flags |= ZEND_ACC_ABSTRACT;
 
-	zend_class_implements(*ppce, 1, sortable_ce_Sorter);
+	//zend_class_implements(*ppce, 1, MUTAGEN_CLASS_ENTRY(Spl, Sorter));
 }
 
 static void sortable_register_class_BidirectionalSeekableArrayIterator(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "BidirectionalSeekableArrayIterator", sortable_fe_BidirectionalSeekableArrayIterator);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "BidirectionalSeekableArrayIterator"), sortable_fe_BidirectionalSeekableArrayIterator);
 	*ppce = zend_register_internal_class(&ce);
 
-	zend_class_implements(*ppce, 1, sortable_ce_BidirectionalSeekableIterator);
+	zend_class_implements(*ppce, 1, MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator));
 }
 
 static void sortable_register_class_ArraySorter(zend_class_entry **ppce)
 {
 	zend_class_entry ce;
-	INIT_CLASS_ENTRY(ce, "ArraySorter", sortable_fe_ArraySorter);
+	INIT_CLASS_ENTRY(ce, MUTAGEN_CLASS_NAME("Spl", "ArraySorter"), sortable_fe_ArraySorter);
 	*ppce = zend_register_internal_class(&ce);
 	(*ppce)->ce_flags |= ZEND_ACC_ABSTRACT;
 
-	zend_class_implements(*ppce, 1, sortable_ce_Sorter);
+	zend_class_implements(*ppce, 1, MUTAGEN_CLASS_ENTRY(Spl, Sorter));
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_Sortable()
 {
-	return sortable_ce_Sortable;
+	return MUTAGEN_CLASS_ENTRY(Spl, Sortable);
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_SortableCollection()
 {
-	return sortable_ce_SortableCollection;
+	return MUTAGEN_CLASS_ENTRY(Spl, SortableCollection);
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_BidirectionalSeekableIterator()
 {
-	return sortable_ce_BidirectionalSeekableIterator;
+	return MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator);
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_Sorter()
 {
-	return sortable_ce_Sorter;
+	return MUTAGEN_CLASS_ENTRY(Spl, Sorter);
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_CollectionSorter()
 {
-	return sortable_ce_CollectionSorter;
+	return MUTAGEN_CLASS_ENTRY(Spl, CollectionSorter);
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_BidirectionalSeekableArrayIterator()
 {
-	return sortable_ce_BidirectionalSeekableArrayIterator;
+	return MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableArrayIterator);
 }
 
 SORTABLE_API zend_class_entry *sortable_get_class_ArraySorter()
 {
-	return sortable_ce_ArraySorter;
+	return MUTAGEN_CLASS_ENTRY(Spl, ArraySorter);
 }
 
 /* {{{ PHP_MSHUTDOWN_FUNCTION */
@@ -715,13 +724,13 @@ PHP_MINIT_FUNCTION(sortable)
 	//memcpy(&sortable_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
 	//sortable_handlers.sort = comparable_compare_objects;
 
-	sortable_register_class_Sortable(&sortable_ce_Sortable);
-	//sortable_register_class_SortableCollection(&sortable_ce_SortableCollection);
-	sortable_register_class_BidirectionalSeekableIterator(&sortable_ce_BidirectionalSeekableIterator);
-	sortable_register_class_Sorter(&sortable_ce_Sorter);
-	sortable_register_class_CollectionSorter(&sortable_ce_CollectionSorter);
-	//sortable_register_class_BidirectionalSeekableArrayIterator(&sortable_ce_BidirectionalSeekableArrayIterator);
-	//sortable_register_class_ArraySorter(&sortable_ce_ArraySorter);
+	sortable_register_class_Sortable(&MUTAGEN_CLASS_ENTRY(Spl, Sortable));
+	sortable_register_class_SortableCollection(&MUTAGEN_CLASS_ENTRY(Spl, SortableCollection));
+	sortable_register_class_BidirectionalSeekableIterator(&MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableIterator));
+	sortable_register_class_Sorter(&MUTAGEN_CLASS_ENTRY(Spl, Sorter));
+	sortable_register_class_CollectionSorter(&MUTAGEN_CLASS_ENTRY(Spl, CollectionSorter));
+	//sortable_register_class_BidirectionalSeekableArrayIterator(&MUTAGEN_CLASS_ENTRY(Spl, BidirectionalSeekableArrayIterator));
+	//sortable_register_class_ArraySorter(&MUTAGEN_CLASS_ENTRY(Spl, ArraySorter));
 
 	return SUCCESS;
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace Spl;
+
 /**
  * Note: extends Iterator instead of SeekableIterator due to E_STRICT
  * thrown when a 2nd parameter is added to seek()
  */
 interface BidirectionalSeekableIterator
-    extends SeekableIterator
+    extends \Iterator
 {
     const SEEK_SET = 0;
     const SEEK_CUR = 1;

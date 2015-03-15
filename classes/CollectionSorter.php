@@ -1,5 +1,7 @@
 <?php
 
+namespace Spl;
+
 
 abstract class CollectionSorter
     implements Sorter

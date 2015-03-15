@@ -1,5 +1,7 @@
 <?php
 
+namespace Spl;
+
 interface Sorter
 {
     /**

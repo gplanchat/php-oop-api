@@ -1,7 +1,9 @@
 <?php
 
+namespace Spl;
+
 interface SortableCollection
-    extends IteratorAggregate, Sortable, Countable
+    extends \IteratorAggregate, Sortable, \Countable
 {
     /**
      * @param BidirectionalSeekableIterator $leftKey
